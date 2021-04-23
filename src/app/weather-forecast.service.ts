@@ -17,7 +17,7 @@ export class WeatherForecastService {
     let citiesWeatherInfo = [];
     items.map((city) => {
       citiesWeatherInfo.push(
-        this.http.get(`https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date=${city}`)
+        this.http.get(`https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date_time=${city}`)
       );
     });
 

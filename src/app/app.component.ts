@@ -21,7 +21,7 @@ export class AppComponent {
   myFunction() {
     var sub30 = moment()
       .subtract(30, "days")
-      .format("YYYY-MM-DD");
+      .format("YYYY-MM-DD[T]HH:mm:ss");
     console.log(sub30);
 
     const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -31,7 +31,7 @@ export class AppComponent {
       let currentLoop = moment()
         .subtract(30, "days")
         .add(interval * 4, "days")
-        .format("YYYY-MM-DD");
+        .format("YYYY-MM-DD[T]HH:mm:ss");
       addFour.push(currentLoop);
     });
 
@@ -39,7 +39,7 @@ export class AppComponent {
     this.weatherService
       .getFourForecastData(...addFour)
       .subscribe(citiesWeatherInfo => {
-        // console.log("Hello" + JSON.stringify(citiesWeatherInfo));
+        console.log("Hello" + JSON.stringify(citiesWeatherInfo));
       });
   }
 }
