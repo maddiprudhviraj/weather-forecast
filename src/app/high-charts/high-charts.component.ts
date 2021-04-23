@@ -23,7 +23,7 @@ export class HighChartsComponent implements OnInit {
   ngOnInit() {
     this.weatherService.getForecastData().subscribe(
       forecastWeatherInfo => {
-        console.log("Hello" + JSON.stringify(forecastWeatherInfo));
+        // console.log("Hello" + JSON.stringify(forecastWeatherInfo));
       },
       err => {
         console.log("HTTP Error", err);

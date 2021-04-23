@@ -10,6 +10,8 @@ import { WeatherForecastService } from "./weather-forecast.service";
 import { HighChartsComponent } from "./high-charts/high-charts.component";
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from 'highcharts-angular';
+import { DatePipe } from "@angular/common";
+
 
 @NgModule({
   imports: [
@@ -26,6 +28,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
     HighChartsComponent
   ],
   bootstrap: [AppComponent],
-  providers: [WeatherForecastService]
+  providers: [WeatherForecastService,DatePipe]
 })
 export class AppModule {}
