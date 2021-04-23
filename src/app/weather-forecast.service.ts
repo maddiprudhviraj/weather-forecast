@@ -13,7 +13,7 @@ export class WeatherForecastService {
   }
 
   getFourForecastData(...items): Observable<any[]> {
-    console.log("For API"+items);
+    // console.log("For API"+items);
     let citiesWeatherInfo = [];
     items.map((city) => {
       citiesWeatherInfo.push(

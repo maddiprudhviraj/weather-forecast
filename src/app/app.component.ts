@@ -22,7 +22,7 @@ export class AppComponent {
     var sub30 = moment()
       .subtract(30, "days")
       .format("YYYY-MM-DD[T]HH:mm:ss");
-    console.log(sub30);
+    // console.log(sub30);
 
     const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
     let addFour = [];
@@ -35,11 +35,11 @@ export class AppComponent {
       addFour.push(currentLoop);
     });
 
-    console.log(addFour);
+    // console.log(addFour);
     this.weatherService
       .getFourForecastData(...addFour)
       .subscribe(citiesWeatherInfo => {
-        console.log("Hello" + JSON.stringify(citiesWeatherInfo));
+        // console.log("Hello" + JSON.stringify(citiesWeatherInfo));
       });
   }
 }
