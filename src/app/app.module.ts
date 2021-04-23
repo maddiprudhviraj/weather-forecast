@@ -9,13 +9,15 @@ import { AgGridModule } from "ag-grid-angular";
 import { WeatherForecastService } from "./weather-forecast.service";
 import { HighChartsComponent } from "./high-charts/high-charts.component";
 import { HttpClientModule } from "@angular/common/http";
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    HighchartsChartModule
   ],
   declarations: [
     AppComponent,

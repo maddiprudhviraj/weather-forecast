@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { WeatherForecastService } from "../weather-forecast.service";
+import * as Highcharts from "highcharts";
 
 @Component({
   selector: "app-high-charts",
@@ -7,6 +8,16 @@ import { WeatherForecastService } from "../weather-forecast.service";
   styleUrls: ["./high-charts.component.css"]
 })
 export class HighChartsComponent implements OnInit {
+  Highcharts: typeof Highcharts = Highcharts;
+  chartOptions: Highcharts.Options = {
+    series: [
+      {
+        data: [1, 2, 3],
+        type: "line"
+      }
+    ]
+  };
+
   constructor(private weatherService: WeatherForecastService) {}
 
   ngOnInit() {
