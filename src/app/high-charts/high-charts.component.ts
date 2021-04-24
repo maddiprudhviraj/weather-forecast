@@ -15,9 +15,9 @@ export class HighChartsComponent implements OnInit {
   chartOptions: Highcharts.Options;
 
   constructor(private weatherService: WeatherForecastService) {
-    var sub30 = moment()
-      .subtract(30, "days")
-      .format("YYYY-MM-DD[T]HH:mm:ss");
+    // var sub30 = moment()
+    //   .subtract(30, "days")
+    //   .format("YYYY-MM-DD[T]HH:mm:ss");
     // console.log(sub30);
 
     const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -34,13 +34,15 @@ export class HighChartsComponent implements OnInit {
     this.weatherService.getFourForecastData(...addFour).subscribe(
       forecastWeatherInfo => {
         console.log("Hello" + JSON.stringify(forecastWeatherInfo));
-        let addFour = [];
+        let addFourOne = [];
 
         forecastWeatherInfo.map(individual => {
-          individual.items[0].forecasts.map(fore => {
-            addFour.push(fore.date);
-            addTemp.push([fore.temperature.low, fore.temperature.high]);
-          });
+          if (individual.items[0].forecasts) {
+            individual.items[0].forecasts.map(fore => {
+              addFourOne.push(fore.date);
+              addTemp.push([fore.temperature.low, fore.temperature.high]);
+            });
+          }
         });
         console.log(addTemp);
 
@@ -56,7 +58,7 @@ export class HighChartsComponent implements OnInit {
             text: "Observed in Vik i Sogn, Norway, 2009"
           },
           xAxis: {
-            categories: addFour
+            categories: addFourOne
           },
           yAxis: {
             title: {

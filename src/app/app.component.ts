@@ -15,7 +15,7 @@ export class AppComponent {
     public datepipe: DatePipe,
     private weatherService: WeatherForecastService
   ) {
-    this.myFunction();
+    // this.myFunction();
   }
 
   myFunction() {
