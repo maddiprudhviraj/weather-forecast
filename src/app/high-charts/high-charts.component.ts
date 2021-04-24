@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { WeatherForecastService } from "../weather-forecast.service";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
 addMore(Highcharts);
 import moment from "moment";
+
 
 @Component({
   selector: "app-high-charts",
@@ -14,6 +15,8 @@ export class HighChartsComponent implements OnInit {
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
 
+  @Input() temperatureData: string;
+
   constructor(private weatherService: WeatherForecastService) {
     // var sub30 = moment()
     //   .subtract(30, "days")
@@ -23,6 +26,8 @@ export class HighChartsComponent implements OnInit {
     const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
     let addFour = [];
     let addTemp = [];
+    let addHumidity = [];
+    let dynamicData;
 
     listOfIntervals.forEach(function(interval) {
       let currentLoop = moment()
@@ -41,10 +46,20 @@ export class HighChartsComponent implements OnInit {
             individual.items[0].forecasts.map(fore => {
               addFourOne.push(fore.date);
               addTemp.push([fore.temperature.low, fore.temperature.high]);
+              addHumidity.push([fore.relative_humidity.low, fore.relative_humidity.high]);
+
+              
             });
           }
         });
         console.log(addTemp);
+
+        if(this.temperatureData === "temp") {
+dynamicData = addTemp
+        }
+else if(this.temperatureData === "humidity") {
+dynamicData = addHumidity
+        }
 
         this.chartOptions = {
           chart: {
@@ -92,7 +107,7 @@ export class HighChartsComponent implements OnInit {
             {
               name: "Temperatures",
               type: "columnrange",
-              data: addTemp
+              data: dynamicData
             }
           ]
         };
