@@ -1,5 +1,8 @@
 {
   "compileOnSave": false,
+   "files":[
+      "node_modules/highcharts-angular/src/app/highcharts-chart.component.ts"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -20,7 +23,7 @@
     ]
   },
   "angularCompilerOptions": {
-    "enableIvy": true,
+    "enableIvy": false,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }
