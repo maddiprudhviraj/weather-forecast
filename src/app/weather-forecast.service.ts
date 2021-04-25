@@ -5,16 +5,18 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class WeatherForecastService {
-  public flagToSend = new Subject<Array<any[]>>();
+  public flagToSend = new Subject<any[]>();
 
-  // trackFlag = this.flagToSend.asObservable();
+  trackFlag = this.flagToSend.asObservable();
 
-  changeFlag(msg: any[]) {
+  changeFlag(msg: any) {
     console.log("rey");
 
     console.log("reyBabu"+msg);
     
     this.flagToSend.next(msg);
+
+    console.log("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
   }
 
   private appflagToSend = new Subject<string>();

@@ -3,8 +3,18 @@ import { WeatherForecastService } from "../weather-forecast.service";
 import { Subject, Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
-import { shareReplay, skipWhile, take, takeUntil } from "rxjs/operators";
+import {
+  first,
+  share,
+  shareReplay,
+  single,
+  skipWhile,
+  take,
+  takeUntil,
+  withLatestFrom
+} from "rxjs/operators";
 import { skip } from "rxjs/operator/skip";
+import { WeatherForecastEvent } from "../weather-forecast-event";
 addMore(Highcharts);
 
 @Component({
@@ -15,6 +25,8 @@ addMore(Highcharts);
 export class HighChartsComponent implements OnInit {
   message: string;
   subscription: Subscription;
+
+  private destroy = new Subject();
 
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
@@ -27,29 +39,14 @@ export class HighChartsComponent implements OnInit {
   data1 = [];
 
   constructor(private weatherService: WeatherForecastService) {
-    this.subscription = this.weatherService.flagToSend.subscribe({
-      next: data => {
-        console.log("tempsdfdf");
-        this.one = data[0];
-        this.two = data[1];
+    this.subscription = this.weatherService.trackFlag.pipe().subscribe(data => {
+      // console.log("tempsdfdfffffffffffffffffffffffffff");
 
-        console.log("temp000XYZ" + this.one);
-        console.log("temp11ABC" + this.two);
-        this.callChart();
-      }
+      this.one = data[0];
+      this.two = data[1];
+
+      this.callChart();
     });
-    // this.subscription = this.weatherService.trackFlag.subscribe(data => {
-    //   console.log("tempsdfdf");
-    //   // this.one = [];
-    //   // this.two = [];
-    //   this.data1 = data;
-    //   this.one = data[0];
-    //   this.two = data[1];
-
-    //   console.log("temp000XYZ" + this.one);
-    //   console.log("temp11ABC" + this.two);
-    //   this.callChart();
-    // });
   }
 
   ngOnInit() {}
@@ -109,6 +106,7 @@ export class HighChartsComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.destroy.next();
     this.subscription.unsubscribe();
   }
 }

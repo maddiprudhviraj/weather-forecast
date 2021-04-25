@@ -36,7 +36,7 @@ export class WeatherForecastEvent {
             });
           }
         });
-        this.weatherService.appchangeFlag('ItsoK');
+        this.weatherService.appchangeFlag("ItsoK");
         // console.log(addTemp);
       },
       err => {
@@ -47,7 +47,7 @@ export class WeatherForecastEvent {
 
   hitBasedOnChart(tempOrHum) {
     // alert(tempOrHum);
-    console.log("1111")
+    console.log("1111");
     const dynamicData = tempOrHum === "temp" ? this.addTemp : this.addHumidity;
 
     // if (this.temperatureData === "temp") {
@@ -59,8 +59,6 @@ export class WeatherForecastEvent {
     // console.log(this.addFourOne, dynamicData);
 
     this.weatherService.changeFlag([this.addFourOne, dynamicData]);
-    console.log("2222")
+    console.log("2222");
   }
-
-  
 }
