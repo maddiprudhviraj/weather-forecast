@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "app-temperature-chart",
@@ -10,5 +10,10 @@ export class TemperatureChartComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  @Output() messageEvent = new EventEmitter<string>();
+
+  ngOnInit() {
+    console.log("raja"+this.temperatureData);
+    this.messageEvent.emit(this.temperatureData);
+  }
 }

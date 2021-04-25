@@ -11,8 +11,9 @@ import { HighChartsComponent } from "./high-charts/high-charts.component";
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from "highcharts-angular";
 import { DatePipe } from "@angular/common";
-import { TemperatureChartComponent } from './temperature-chart/temperature-chart.component';
-import { HumidityChartComponent } from './humidity-chart/humidity-chart.component';
+import { TemperatureChartComponent } from "./temperature-chart/temperature-chart.component";
+import { HumidityChartComponent } from "./humidity-chart/humidity-chart.component";
+import { WeatherForecastEvent } from "./weather-forecast-event";
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import { HumidityChartComponent } from './humidity-chart/humidity-chart.componen
     HumidityChartComponent
   ],
   bootstrap: [AppComponent],
-  providers: [WeatherForecastService, DatePipe]
+  providers: [WeatherForecastService, DatePipe, WeatherForecastEvent]
 })
 export class AppModule {}
