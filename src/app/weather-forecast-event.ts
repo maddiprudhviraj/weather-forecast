@@ -10,58 +10,43 @@ export class WeatherForecastEvent {
   addHumidity = [];
   addFourOne = [];
 
-  getWeatherInfo() {
+  getWeatherInfo(selectedDate) {
     const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
     let addFour = [];
     listOfIntervals.forEach(function(interval) {
-      let currentLoop = moment()
+      let currentLoop = moment(selectedDate)
         .subtract(30, "days")
         .add(interval * 4, "days")
         .format("YYYY-MM-DD[T]HH:mm:ss");
       addFour.push(currentLoop);
     });
+    console.log("Der" + JSON.stringify(addFour));
     this.weatherService.getFourForecastData(...addFour).subscribe(
       forecastWeatherInfo => {
         // console.log("Hello" + JSON.stringify(forecastWeatherInfo));
-
+        this.addFourOne = [];
         forecastWeatherInfo.map(individual => {
           if (individual.items[0].forecasts) {
             individual.items[0].forecasts.map(fore => {
-              this.addFourOne.push(fore.date);
-              this.addTemp.push([fore.temperature.low, fore.temperature.high]);
-              this.addHumidity.push([
-                fore.relative_humidity.low,
-                fore.relative_humidity.high
-              ]);
+              this.addFourOne.push({
+                Date: fore.date,
+                temp_low: fore.temperature.low,
+                temp_high: fore.temperature.high,
+                hum_low: fore.relative_humidity.low,
+                hum_high: fore.relative_humidity.high
+              });
             });
           }
         });
         // this.weatherService.appchangeFlag("ItsoK");
         const dynamicData = this.addTemp;
         const hunData = this.addHumidity;
-        this.weatherService.changeFlag([this.addFourOne, dynamicData,hunData]);
-        // console.log(addTemp);
+
+        this.weatherService.changeFlag(this.addFourOne);
       },
       err => {
         console.log("HTTP Error", err);
       }
     );
   }
-
-  // hitBasedOnChart(tempOrHum) {
-  // alert(tempOrHum);
-  // console.log("1111");
-  // const dynamicData = tempOrHum === "temp" ? this.addTemp : this.addHumidity;
-
-  // if (this.temperatureData === "temp") {
-  //   const dynamicData = addTemp;
-  // } else if (this.temperatureData === "humidity") {
-  //   const dynamicData = addHumidity;
-  // }
-
-  // console.log(this.addFourOne, dynamicData);
-
-  // this.weatherService.changeFlag([this.addFourOne, dynamicData]);
-  // console.log("2222");
-  //}
 }

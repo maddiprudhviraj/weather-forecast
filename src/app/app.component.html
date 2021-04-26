@@ -3,6 +3,9 @@
   Start editing to see some magic happen :)
 </p>
 
+<input type="date" id="changeDate" [(ngModel)]="selectedDate" [max]="getToday()">
+
+<button (click)="changeDate(selectedDate)">Refresh</button>
 
 
   <div class="btn-group">

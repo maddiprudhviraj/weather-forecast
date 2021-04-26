@@ -1,9 +1,8 @@
 <p>
-tabular-view works!
+  tabular-view works!
 </p>
-<ag-grid-angular 
-    style="width: 500px; height: 200px;" 
-    class="ag-theme-alpine"
-    [rowData]="rowData" 
+<ng-container *ngIf="rowData.length!=0">
+  <ag-grid-angular style="width: 500px; height: 200px;" class="ag-theme-alpine" [rowData]="rowData"
     [columnDefs]="columnDefs">
-</ag-grid-angular>
+  </ag-grid-angular>
+</ng-container>
