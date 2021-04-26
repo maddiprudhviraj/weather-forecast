@@ -8,6 +8,8 @@ import { Router } from "@angular/router";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+  isSelectedNewDate: boolean;
+
   constructor(
     private _weatherForecastEvent: WeatherForecastEvent,
     private router: Router
@@ -15,6 +17,10 @@ export class AppComponent {
 
   disableFutureDates(): string {
     return new Date().toISOString().split("T")[0];
+  }
+
+  dateSelected() {
+    this.isSelectedNewDate = true;
   }
 
   ngOnInit() {

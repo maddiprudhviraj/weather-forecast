@@ -20,7 +20,7 @@ export class HighChartsComponent implements OnInit {
 
   constructor(
     private weatherService: WeatherForecastService,
-    private router: Router,
+    private router: Router
   ) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
       weatherHistory => {
@@ -77,7 +77,7 @@ export class HighChartsComponent implements OnInit {
         inverted: false
       },
       title: {
-        text: "Weather Report of last 30 Days"
+        text: yAxisTitle[0]+" "+"Report of last 30 Days"
       },
       subtitle: {
         text: "Report on Every Individual Date"

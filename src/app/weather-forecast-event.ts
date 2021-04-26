@@ -39,7 +39,7 @@ export class WeatherForecastEvent {
           }
         });
 
-        this.weatherService.weatherReport(weatherDataReport);
+        this.weatherService.weatherReport(weatherDataReport.reverse());
       },
       err => {
         console.log("HTTP Error", err);
