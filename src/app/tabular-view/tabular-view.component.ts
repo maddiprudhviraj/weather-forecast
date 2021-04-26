@@ -24,7 +24,7 @@ export class TabularViewComponent implements OnInit {
     private weatherService: WeatherForecastService,
     private router: Router
   ) {
-    this.subscription = this.weatherService.trackFlag.subscribe(data => {
+    this.subscription = this.weatherService.trackWeatherReport.subscribe(data => {
       this.temperatureData1 = this.router.url;
       if (data.length > 0) {
         this.rowData = [];

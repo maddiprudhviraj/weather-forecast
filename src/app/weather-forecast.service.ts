@@ -5,27 +5,25 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class WeatherForecastService {
-  public flagToSend = new BehaviorSubject<any[]>([]);
+  public weatherData = new BehaviorSubject<any[]>([]);
 
-  trackFlag = this.flagToSend.asObservable();
+  trackWeatherReport = this.weatherData.asObservable();
 
-  weatherReport(msg: any) {
-    this.flagToSend.next(msg);
+  weatherReport(weatherDataReport: any[]) {
+    this.weatherData.next(weatherDataReport);
   }
 
   constructor(private http: HttpClient) {}
 
-  getFourForecastData(...items): Observable<any[]> {
-    // console.log("For API"+items);
-    let citiesWeatherInfo = [];
-    items.map(city => {
-      citiesWeatherInfo.push(
+  getWeatherReportHistory(...dates: any[]): Observable<any[]> {
+    let weatherInfoFromDates = [];
+    dates.map(date => {
+      weatherInfoFromDates.push(
         this.http.get(
-          `https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date_time=${city}`
+          `https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date_time=${date}`
         )
       );
     });
-
-    return forkJoin([...citiesWeatherInfo]);
+    return forkJoin([...weatherInfoFromDates]);
   }
 }

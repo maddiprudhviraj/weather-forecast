@@ -16,7 +16,7 @@ export class WeatherForecastEvent {
         .format("YYYY-MM-DD[T]HH:mm:ss");
       dynamicDates.push(date);
     });
-    this.weatherService.getFourForecastData(...dynamicDates).subscribe(
+    this.weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
       weatherDataResponse => {
         let weatherDataReport = [];
         weatherDataResponse.map(dateWeatherReport => {

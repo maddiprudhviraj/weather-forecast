@@ -33,7 +33,7 @@ export class HighChartsComponent implements OnInit {
     private router: Router,
     location: Location
   ) {
-    this.subscription = this.weatherService.trackFlag.subscribe(data => {
+    this.subscription = this.weatherService.trackWeatherReport.subscribe(data => {
       this.temperatureData1 = this.router.url;
 
       if (data.length > 0) {
