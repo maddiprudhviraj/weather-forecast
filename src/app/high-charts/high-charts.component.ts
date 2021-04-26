@@ -33,13 +33,13 @@ export class HighChartsComponent implements OnInit {
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
 
-  one: any;
-  two: any;
+  one = [];
+  two = [];
 
   temperatureData1: string;
   lessons$: any;
   data1 = [];
-  three: any;
+  three = [];
 
   constructor(
     private weatherService: WeatherForecastService,
@@ -52,14 +52,27 @@ export class HighChartsComponent implements OnInit {
       this.temperatureData1 = this.router.url;
 
       if (data.length > 0) {
-        // console.log(JSON.stringify(data[1]));
+        console.log(JSON.stringify(data));
         // console.log(JSON.stringify(data[2]));
-        this.one = data[0];
-        this.two = data[1];
-        this.three = data[2];
+        // this.one = data;
+        // console.log(JSON.stringify(this.one))
+        this.one = [];
+        this.two = [];
+        this.three = [];
         if (this.temperatureData1 === "/temperature") {
+          data.map(item => {
+            this.one.push(item.Date);
+            this.two.push([item.temp_low, item.temp_high]);
+          });
+          // console.log(this.two)
           this.callChart(this.two);
         } else {
+          data.map(item => {
+            this.one.push(item.Date);
+            this.three.push([item.hum_low, item.hum_high]);
+          });
+          // console.log(this.three)
+
           this.callChart(this.three);
         }
       }

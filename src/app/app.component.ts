@@ -23,12 +23,22 @@ export class AppComponent {
   ) {
     this.subscription = this.weatherService.apptrackFlag.subscribe(data => {
       this.mainCall = data;
-      console.log(this.mainCall);
+      // console.log(this.mainCall);
     });
   }
 
+  getToday(): string {
+   return new Date().toISOString().split('T')[0]
+}
+
   ngOnInit() {
     this._weatherForecastEvent.getWeatherInfo();
+  }
+
+  changeDate(selectedDate){
+    // alert("1"+JSON.stringify(selectedDate))
+    this._weatherForecastEvent.getWeatherInfo(selectedDate);
+    // this.selectedDate = 
   }
 
    navigate(flag: any) {

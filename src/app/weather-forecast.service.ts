@@ -12,7 +12,7 @@ export class WeatherForecastService {
   changeFlag(msg: any) {
     // console.log("rey");
 
-    // console.log("reyBabu"+msg);
+    //  console.log("reyBabu"+JSON.stringify(msg));
 
     this.flagToSend.next(msg);
 
