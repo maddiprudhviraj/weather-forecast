@@ -23,7 +23,6 @@ export class WeatherForecastEvent {
     console.log("Der" + JSON.stringify(addFour));
     this.weatherService.getFourForecastData(...addFour).subscribe(
       forecastWeatherInfo => {
-        // console.log("Hello" + JSON.stringify(forecastWeatherInfo));
         this.addFourOne = [];
         forecastWeatherInfo.map(individual => {
           if (individual.items[0].forecasts) {
@@ -38,7 +37,6 @@ export class WeatherForecastEvent {
             });
           }
         });
-        // this.weatherService.appchangeFlag("ItsoK");
         const dynamicData = this.addTemp;
         const hunData = this.addHumidity;
 

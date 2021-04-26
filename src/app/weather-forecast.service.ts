@@ -10,13 +10,7 @@ export class WeatherForecastService {
   trackFlag = this.flagToSend.asObservable();
 
   changeFlag(msg: any) {
-    // console.log("rey");
-
-    //  console.log("reyBabu"+JSON.stringify(msg));
-
     this.flagToSend.next(msg);
-
-    // console.log("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
   }
 
   private appflagToSend = new Subject<string>();
@@ -28,12 +22,6 @@ export class WeatherForecastService {
   }
 
   constructor(private http: HttpClient) {}
-
-  getForecastData(): Observable<any[]> {
-    return this.http.get<any[]>(
-      "https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date=2019-12-24"
-    );
-  }
 
   getFourForecastData(...items): Observable<any[]> {
     // console.log("For API"+items);

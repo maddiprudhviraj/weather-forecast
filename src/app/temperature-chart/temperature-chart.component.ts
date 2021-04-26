@@ -6,16 +6,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
   styleUrls: ["./temperature-chart.component.css"]
 })
 export class TemperatureChartComponent implements OnInit {
-  
+  constructor() {}
 
-  constructor() {
-    // alert("tem comp");
-  }
-
-  // @Output() messageEvent = new EventEmitter<string>();
-
-  ngOnInit() {
-    //console.log("raja"+this.temperatureData);
-   // this.messageEvent.emit(this.temperatureData);
-  }
+  ngOnInit() {}
 }

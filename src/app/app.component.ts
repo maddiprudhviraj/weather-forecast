@@ -19,40 +19,26 @@ export class AppComponent {
   constructor(
     private _weatherForecastEvent: WeatherForecastEvent,
     private weatherService: WeatherForecastService,
-    private router: Router,
+    private router: Router
   ) {
     this.subscription = this.weatherService.apptrackFlag.subscribe(data => {
       this.mainCall = data;
-      // console.log(this.mainCall);
     });
   }
 
   getToday(): string {
-   return new Date().toISOString().split('T')[0]
-}
+    return new Date().toISOString().split("T")[0];
+  }
 
   ngOnInit() {
     this._weatherForecastEvent.getWeatherInfo();
   }
 
-  changeDate(selectedDate){
-    // alert("1"+JSON.stringify(selectedDate))
+  changeDate(selectedDate: Date) {
     this._weatherForecastEvent.getWeatherInfo(selectedDate);
-    // this.selectedDate = 
   }
 
-   navigate(flag: any) {
-    //  alert(flag)
+  navigate(flag: any) {
     this.router.navigateByUrl(flag);
   }
-
-  // receiveMessage($event) {
-  //   this.message = $event;
-  //   this._weatherForecastEvent.hitBasedOnChart(this.message);
-  //   // alert(this.message);
-  // }
-
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
 }
