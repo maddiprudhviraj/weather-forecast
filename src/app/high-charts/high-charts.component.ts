@@ -42,7 +42,7 @@ export class HighChartsComponent implements OnInit {
             this.displayWeatherReport(
               xAxisDates,
               temperatureHistory,
-              "Temperature ( \xB0C )"
+              ["Temperature","Temperature ( \xB0C )", "\xB0C"]
             );
           } else {
             weatherHistory.map(weatherReport => {
@@ -56,7 +56,7 @@ export class HighChartsComponent implements OnInit {
             this.displayWeatherReport(
               xAxisDates,
               humidityHistory,
-              "Humidity ( %rh )"
+              ["Humidity","Humidity ( %rh )", "%"]
             );
           }
         }
@@ -69,7 +69,7 @@ export class HighChartsComponent implements OnInit {
   displayWeatherReport(
     xAxisDates: string[],
     weatherReport: any,
-    yAxisTitle: string
+    yAxisTitle: string[]
   ) {
     this.chartOptions = {
       chart: {
@@ -77,35 +77,28 @@ export class HighChartsComponent implements OnInit {
         inverted: false
       },
       title: {
-        text: "Weaher Report of last 30 Days"
+        text: "Weather Report of last 30 Days"
       },
       subtitle: {
-        text: "Observed in Vik i Sogn, Norway, 2009"
+        text: "Report on Every Individual Date"
       },
       xAxis: {
         categories: xAxisDates
       },
       yAxis: {
         title: {
-          text: yAxisTitle
+          text: yAxisTitle[1]
         }
       },
       tooltip: {
-        headerFormat:
-          '<span style = "font-size:10px">{point.key}</span><table>',
-        pointFormat:
-          '<tr><td style = "color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style = "padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: "</table>",
-        shared: true,
-        useHTML: true
+        valueSuffix: yAxisTitle[2]
       },
       plotOptions: {
         columnrange: {
           dataLabels: {
             enabled: true,
             formatter: function() {
-              return this.y + "\xB0C";
+              return this.y + yAxisTitle[2];
             }
           }
         }
@@ -115,7 +108,7 @@ export class HighChartsComponent implements OnInit {
       },
       series: [
         {
-          name: "Temperatures",
+          name: yAxisTitle[0],
           type: "columnrange",
           data: weatherReport
         }
