@@ -1,6 +1,7 @@
 import { Component, VERSION } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import moment from "moment";
+import { WeatherForecastEvent } from "./weather-forecast-event";
+import { Observable, Subscription } from "rxjs";
 import { WeatherForecastService } from "./weather-forecast.service";
 
 @Component({
@@ -10,36 +11,31 @@ import { WeatherForecastService } from "./weather-forecast.service";
 })
 export class AppComponent {
   name = "Angular " + VERSION.major;
+  subscription: Subscription;
+  message: string;
+  mainCall: string;
 
   constructor(
-    public datepipe: DatePipe,
+    private _weatherForecastEvent: WeatherForecastEvent,
     private weatherService: WeatherForecastService
   ) {
-    this.myFunction();
-  }
-
-  myFunction() {
-    var sub30 = moment()
-      .subtract(30, "days")
-      .format("YYYY-MM-DD[T]HH:mm:ss");
-    // console.log(sub30);
-
-    const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
-    let addFour = [];
-
-    listOfIntervals.forEach(function(interval) {
-      let currentLoop = moment()
-        .subtract(30, "days")
-        .add(interval * 4, "days")
-        .format("YYYY-MM-DD[T]HH:mm:ss");
-      addFour.push(currentLoop);
+    this.subscription = this.weatherService.apptrackFlag.subscribe(data => {
+      this.mainCall = data;
+      console.log(this.mainCall);
     });
-
-    // console.log(addFour);
-    this.weatherService
-      .getFourForecastData(...addFour)
-      .subscribe(citiesWeatherInfo => {
-        // console.log("Hello" + JSON.stringify(citiesWeatherInfo));
-      });
   }
+
+  ngOnInit() {
+    this._weatherForecastEvent.getWeatherInfo();
+  }
+
+  receiveMessage($event) {
+    this.message = $event;
+    this._weatherForecastEvent.hitBasedOnChart(this.message);
+    // alert(this.message);
+  }
+
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 }

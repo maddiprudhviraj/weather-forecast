@@ -4,4 +4,9 @@
 </p>
 <app-tabular-view></app-tabular-view>
 
-<app-high-charts></app-high-charts>
+<!-- <app-high-charts></app-high-charts> -->
+<ng-container *ngIf="this.mainCall">
+  <app-temperature-chart (messageEvent)="receiveMessage($event)"></app-temperature-chart>
+
+  <app-humidity-chart (messageEvent)="receiveMessage($event)"></app-humidity-chart>
+</ng-container>

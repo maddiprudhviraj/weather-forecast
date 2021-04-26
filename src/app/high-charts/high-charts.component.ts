@@ -1,9 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { WeatherForecastService } from "../weather-forecast.service";
+import { Subject, Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
+import {
+  first,
+  share,
+  shareReplay,
+  single,
+  skipWhile,
+  take,
+  takeUntil,
+  withLatestFrom
+} from "rxjs/operators";
+import { skip } from "rxjs/operator/skip";
+import { WeatherForecastEvent } from "../weather-forecast-event";
 addMore(Highcharts);
-import moment from "moment";
 
 @Component({
   selector: "app-high-charts",
@@ -11,95 +23,90 @@ import moment from "moment";
   styleUrls: ["./high-charts.component.css"]
 })
 export class HighChartsComponent implements OnInit {
+  message: string;
+  subscription: Subscription;
+
+  private destroy = new Subject();
+
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
 
+  one: any;
+  two: any;
+
+  @Input() temperatureData: string;
+  lessons$: any;
+  data1 = [];
+
   constructor(private weatherService: WeatherForecastService) {
-    var sub30 = moment()
-      .subtract(30, "days")
-      .format("YYYY-MM-DD[T]HH:mm:ss");
-    // console.log(sub30);
+    this.subscription = this.weatherService.trackFlag.pipe().subscribe(data => {
+      // console.log("tempsdfdfffffffffffffffffffffffffff");
 
-    const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
-    let addFour = [];
-    let addTemp = [];
+      this.one = data[0];
+      this.two = data[1];
 
-    listOfIntervals.forEach(function(interval) {
-      let currentLoop = moment()
-        .subtract(30, "days")
-        .add(interval * 4, "days")
-        .format("YYYY-MM-DD[T]HH:mm:ss");
-      addFour.push(currentLoop);
+      this.callChart();
     });
-    this.weatherService.getFourForecastData(...addFour).subscribe(
-      forecastWeatherInfo => {
-        console.log("Hello" + JSON.stringify(forecastWeatherInfo));
-        let addFour = [];
-
-        forecastWeatherInfo.map(individual => {
-          individual.items[0].forecasts.map(fore => {
-            addFour.push(fore.date);
-            addTemp.push([fore.temperature.low, fore.temperature.high]);
-          });
-        });
-        console.log(addTemp);
-
-        this.chartOptions = {
-          chart: {
-            type: "columnrange",
-            inverted: false
-          },
-          title: {
-            text: "Temperature variation by month"
-          },
-          subtitle: {
-            text: "Observed in Vik i Sogn, Norway, 2009"
-          },
-          xAxis: {
-            categories: addFour
-          },
-          yAxis: {
-            title: {
-              text: "Temperature ( \xB0C )"
-            }
-          },
-          tooltip: {
-            headerFormat:
-              '<span style = "font-size:10px">{point.key}</span><table>',
-            pointFormat:
-              '<tr><td style = "color:{series.color};padding:0">{series.name}: </td>' +
-              '<td style = "padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: "</table>",
-            shared: true,
-            useHTML: true
-          },
-          plotOptions: {
-            columnrange: {
-              dataLabels: {
-                enabled: true,
-                formatter: function() {
-                  return this.y + "\xB0C";
-                }
-              }
-            }
-          },
-          credits: {
-            enabled: false
-          },
-          series: [
-            {
-              name: "Temperatures",
-              type: "columnrange",
-              data: addTemp
-            }
-          ]
-        };
-      },
-      err => {
-        console.log("HTTP Error", err);
-      }
-    );
   }
 
   ngOnInit() {}
+
+  callChart() {
+    // alert("hello")
+    this.chartOptions = {
+      chart: {
+        type: "columnrange",
+        inverted: false
+      },
+      title: {
+        text: "Temperature variation by month"
+      },
+      subtitle: {
+        text: "Observed in Vik i Sogn, Norway, 2009"
+      },
+      xAxis: {
+        categories: this.one
+      },
+      yAxis: {
+        title: {
+          text: "Temperature ( \xB0C )"
+        }
+      },
+      tooltip: {
+        headerFormat:
+          '<span style = "font-size:10px">{point.key}</span><table>',
+        pointFormat:
+          '<tr><td style = "color:{series.color};padding:0">{series.name}: </td>' +
+          '<td style = "padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: "</table>",
+        shared: true,
+        useHTML: true
+      },
+      plotOptions: {
+        columnrange: {
+          dataLabels: {
+            enabled: true,
+            formatter: function() {
+              return this.y + "\xB0C";
+            }
+          }
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      series: [
+        {
+          name: "Temperatures",
+          type: "columnrange",
+          data: this.two
+        }
+      ]
+    };
+  }
+
+  ngOnDestroy() {
+    this.destroy.next();
+    this.subscription.unsubscribe();
+  }
 }
