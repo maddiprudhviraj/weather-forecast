@@ -15,6 +15,8 @@ import {
 } from "rxjs/operators";
 import { skip } from "rxjs/operator/skip";
 import { WeatherForecastEvent } from "../weather-forecast-event";
+import { Router } from "@angular/router";
+import { Location } from "@angular/common";
 addMore(Highcharts);
 
 @Component({
@@ -26,7 +28,7 @@ export class HighChartsComponent implements OnInit {
   message: string;
   subscription: Subscription;
 
-  private destroy = new Subject();
+  // private destroy = new Subject();
 
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
@@ -34,28 +36,32 @@ export class HighChartsComponent implements OnInit {
   one: any;
   two: any;
 
-  @Input() tempData: string;
-
-  @Input() temperatureData: string;
+  temperatureData1: string;
   lessons$: any;
   data1 = [];
   three: any;
 
-  constructor(private weatherService: WeatherForecastService) {
+  constructor(
+    private weatherService: WeatherForecastService,
+    private router: Router,
+    location: Location
+  ) {
+    // alert("high comp")
     this.subscription = this.weatherService.trackFlag.subscribe(data => {
-      // console.log("tempsdfdfffffffffffffffffffffffffff");
+      // console.log(this.router.url);
+      this.temperatureData1 = this.router.url;
 
-      console.log(this.tempData);
-      console.log(JSON.stringify(data[1]));
-      console.log(JSON.stringify(data[2]));
-
-      this.one = data[0];
-      this.two = data[1];
-      this.three = data[2];
-      if (this.tempData === "temp") {
-        this.callChart(this.two);
-      } else {
-        this.callChart(this.three);
+      if (data.length > 0) {
+        // console.log(JSON.stringify(data[1]));
+        // console.log(JSON.stringify(data[2]));
+        this.one = data[0];
+        this.two = data[1];
+        this.three = data[2];
+        if (this.temperatureData1 === "/temperature") {
+          this.callChart(this.two);
+        } else {
+          this.callChart(this.three);
+        }
       }
     });
   }
@@ -117,7 +123,7 @@ export class HighChartsComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.destroy.next();
+    // this.destroy.next();
     this.subscription.unsubscribe();
   }
 }

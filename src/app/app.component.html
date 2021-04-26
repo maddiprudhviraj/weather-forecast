@@ -2,11 +2,19 @@
 <p>
   Start editing to see some magic happen :)
 </p>
-<app-tabular-view></app-tabular-view>
+
+
+
+  <div class="btn-group">
+  <button type="button" class="btn btn-primary" (click)="navigate('temperature')">Temperature</button>
+  <button type="button" class="btn btn-primary" (click)="navigate('humidity')">Humidity</button>
+</div>
+
+<router-outlet></router-outlet>
 
 <!-- <app-high-charts></app-high-charts> -->
 <!-- <ng-container *ngIf="this.mainCall"> -->
-  <app-temperature-chart></app-temperature-chart>
+  <!-- <app-temperature-chart></app-temperature-chart> -->
 
-  <app-humidity-chart></app-humidity-chart>
+  <!-- <app-humidity-chart></app-humidity-chart> -->
 <!-- </ng-container> -->
