@@ -77,7 +77,7 @@ export class HighChartsComponent implements OnInit {
         inverted: false
       },
       title: {
-        text: "Weather Report of last 30 Days"
+        text: yAxisTitle[0]+" "+"Report of last 30 Days"
       },
       subtitle: {
         text: "Report on Every Individual Date"
