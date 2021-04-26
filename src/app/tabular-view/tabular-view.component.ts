@@ -26,12 +26,12 @@ export class TabularViewComponent implements OnInit {
     private router: Router
   ) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
-      data => {
+      weatherHistory => {
         let currentRoute = this.router.url;
-        if (data.length > 0) {
+        if (weatherHistory.length > 0) {
           this.rowData = [];
           if (currentRoute === "/temperature") {
-            data.map(item => {
+            weatherHistory.map(item => {
               this.rowData.push({
                 Date: item.Date,
                 Low: item.temperature_low,
@@ -39,7 +39,7 @@ export class TabularViewComponent implements OnInit {
               });
             });
           } else {
-            data.map(item => {
+            weatherHistory.map(item => {
               this.rowData.push({
                 Date: item.Date,
                 Low: item.humidity_low,
