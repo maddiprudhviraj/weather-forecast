@@ -14,6 +14,8 @@ import { DatePipe } from "@angular/common";
 import { TemperatureChartComponent } from "./temperature-chart/temperature-chart.component";
 import { HumidityChartComponent } from "./humidity-chart/humidity-chart.component";
 import { WeatherForecastEvent } from "./weather-forecast-event";
+import { AppRoutingModule } from "./app-routing.module";
+
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { WeatherForecastEvent } from "./weather-forecast-event";
     FormsModule,
     HttpClientModule,
     AgGridModule.withComponents([]),
-    HighchartsChartModule
+    HighchartsChartModule,
+    AppRoutingModule
+    
   ],
   declarations: [
     AppComponent,
@@ -29,7 +33,8 @@ import { WeatherForecastEvent } from "./weather-forecast-event";
     TabularViewComponent,
     HighChartsComponent,
     TemperatureChartComponent,
-    HumidityChartComponent
+    HumidityChartComponent,
+    
   ],
   bootstrap: [AppComponent],
   providers: [WeatherForecastService, DatePipe, WeatherForecastEvent]

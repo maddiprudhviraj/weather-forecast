@@ -3,6 +3,7 @@ import { DatePipe } from "@angular/common";
 import { WeatherForecastEvent } from "./weather-forecast-event";
 import { Observable, Subscription } from "rxjs";
 import { WeatherForecastService } from "./weather-forecast.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "my-app",
@@ -17,7 +18,8 @@ export class AppComponent {
 
   constructor(
     private _weatherForecastEvent: WeatherForecastEvent,
-    private weatherService: WeatherForecastService
+    private weatherService: WeatherForecastService,
+    private router: Router,
   ) {
     this.subscription = this.weatherService.apptrackFlag.subscribe(data => {
       this.mainCall = data;
@@ -27,6 +29,11 @@ export class AppComponent {
 
   ngOnInit() {
     this._weatherForecastEvent.getWeatherInfo();
+  }
+
+   navigate(flag: any) {
+    //  alert(flag)
+    this.router.navigateByUrl(flag);
   }
 
   // receiveMessage($event) {
