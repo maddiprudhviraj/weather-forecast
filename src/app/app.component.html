@@ -5,7 +5,7 @@
     <div style="display:inline">
       <div style="margin-bottom:20px">Select Date to get Last 30Days Weather Report</div>
       <input type="date" style="margin-right:10px;" [(ngModel)]="selectedDate" (ngModelChange)="dateSelected()" [max]="disableFutureDates()">
-      <button class="btn btn-primary" [ngStyle]="!selectedNewDate ? {'cursor': 'no-drop'} : {'cursor': 'pointer'}" [disabled]="!selectedNewDate" (click)="changeDate(selectedDate)">Submit</button>
+      <button class="btn btn-primary" [ngStyle]="!isSelectedNewDate ? {'cursor': 'no-drop'} : {'cursor': 'pointer'}" [disabled]="!isSelectedNewDate" (click)="changeDate(selectedDate)">Submit</button>
     </div>
 
     <div class="btn-group btn-group-justified">
