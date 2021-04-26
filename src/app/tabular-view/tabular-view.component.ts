@@ -32,16 +32,16 @@ export class TabularViewComponent implements OnInit {
           data.map(item => {
             this.rowData.push({
               Date: item.Date,
-              Low: item.temp_low,
-              High: item.temp_high
+              Low: item.temperature_low,
+              High: item.temperature_high
             });
           });
         } else {
           data.map(item => {
             this.rowData.push({
               Date: item.Date,
-              Low: item.hum_low,
-              High: item.hum_high
+              Low: item.humidity_low,
+              High: item.humidity_high
             });
           });
         }

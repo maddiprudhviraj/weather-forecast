@@ -1,12 +1,11 @@
-
-<input type="date" id="changeDate" [(ngModel)]="selectedDate" [max]="getToday()">
+<input type="date" [(ngModel)]="selectedDate" [max]="disableFutureDates()">
 
 <button (click)="changeDate(selectedDate)">Refresh</button>
 
 
-  <div class="btn-group">
-  <button type="button" class="btn btn-primary" (click)="navigate('temperature')">Temperature</button>
-  <button type="button" class="btn btn-primary" (click)="navigate('humidity')">Humidity</button>
+<div class="btn-group">
+  <button type="button" class="btn btn-primary" (click)="navigatePage('temperature')">Temperature</button>
+  <button type="button" class="btn btn-primary" (click)="navigatePage('humidity')">Humidity</button>
 </div>
 
 <router-outlet></router-outlet>

@@ -43,14 +43,14 @@ export class HighChartsComponent implements OnInit {
         if (this.temperatureData1 === "/temperature") {
           data.map(item => {
             this.one.push(item.Date);
-            this.two.push([item.temp_low, item.temp_high]);
+            this.two.push([item.temperature_low, item.temperature_high]);
           });
 
           this.callChart(this.two);
         } else {
           data.map(item => {
             this.one.push(item.Date);
-            this.three.push([item.hum_low, item.hum_high]);
+            this.three.push([item.humidity_low, item.humidity_high]);
           });
 
           this.callChart(this.three);

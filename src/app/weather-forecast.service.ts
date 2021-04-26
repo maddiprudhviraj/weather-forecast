@@ -9,16 +9,8 @@ export class WeatherForecastService {
 
   trackFlag = this.flagToSend.asObservable();
 
-  changeFlag(msg: any) {
+  weatherReport(msg: any) {
     this.flagToSend.next(msg);
-  }
-
-  private appflagToSend = new Subject<string>();
-
-  apptrackFlag = this.appflagToSend.asObservable();
-
-  appchangeFlag(msg: any) {
-    this.appflagToSend.next(msg);
   }
 
   constructor(private http: HttpClient) {}
