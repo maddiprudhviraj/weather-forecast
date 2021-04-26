@@ -36,7 +36,10 @@ export class WeatherForecastEvent {
             });
           }
         });
-        this.weatherService.appchangeFlag("ItsoK");
+        // this.weatherService.appchangeFlag("ItsoK");
+        const dynamicData = this.addTemp;
+        const hunData = this.addHumidity;
+        this.weatherService.changeFlag([this.addFourOne, dynamicData,hunData]);
         // console.log(addTemp);
       },
       err => {
@@ -45,20 +48,20 @@ export class WeatherForecastEvent {
     );
   }
 
-  hitBasedOnChart(tempOrHum) {
-    // alert(tempOrHum);
-    console.log("1111");
-    const dynamicData = tempOrHum === "temp" ? this.addTemp : this.addHumidity;
+  // hitBasedOnChart(tempOrHum) {
+  // alert(tempOrHum);
+  // console.log("1111");
+  // const dynamicData = tempOrHum === "temp" ? this.addTemp : this.addHumidity;
 
-    // if (this.temperatureData === "temp") {
-    //   const dynamicData = addTemp;
-    // } else if (this.temperatureData === "humidity") {
-    //   const dynamicData = addHumidity;
-    // }
+  // if (this.temperatureData === "temp") {
+  //   const dynamicData = addTemp;
+  // } else if (this.temperatureData === "humidity") {
+  //   const dynamicData = addHumidity;
+  // }
 
-    // console.log(this.addFourOne, dynamicData);
+  // console.log(this.addFourOne, dynamicData);
 
-    this.weatherService.changeFlag([this.addFourOne, dynamicData]);
-    console.log("2222");
-  }
+  // this.weatherService.changeFlag([this.addFourOne, dynamicData]);
+  // console.log("2222");
+  //}
 }

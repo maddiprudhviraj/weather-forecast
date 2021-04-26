@@ -10,13 +10,13 @@ export class WeatherForecastService {
   trackFlag = this.flagToSend.asObservable();
 
   changeFlag(msg: any) {
-    console.log("rey");
+    // console.log("rey");
 
-    console.log("reyBabu"+msg);
+    // console.log("reyBabu"+msg);
     
     this.flagToSend.next(msg);
 
-    console.log("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+    // console.log("HUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
   }
 
   private appflagToSend = new Subject<string>();

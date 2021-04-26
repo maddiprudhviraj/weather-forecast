@@ -34,24 +34,35 @@ export class HighChartsComponent implements OnInit {
   one: any;
   two: any;
 
+  @Input() tempData: string;
+
   @Input() temperatureData: string;
   lessons$: any;
   data1 = [];
+  three: any;
 
   constructor(private weatherService: WeatherForecastService) {
-    this.subscription = this.weatherService.trackFlag.pipe().subscribe(data => {
+    this.subscription = this.weatherService.trackFlag.subscribe(data => {
       // console.log("tempsdfdfffffffffffffffffffffffffff");
+
+      console.log(this.tempData);
+      console.log(JSON.stringify(data[1]));
+      console.log(JSON.stringify(data[2]));
 
       this.one = data[0];
       this.two = data[1];
-
-      this.callChart();
+      this.three = data[2];
+      if (this.tempData === "temp") {
+        this.callChart(this.two);
+      } else {
+        this.callChart(this.three);
+      }
     });
   }
 
   ngOnInit() {}
 
-  callChart() {
+  callChart(item) {
     // alert("hello")
     this.chartOptions = {
       chart: {
@@ -99,7 +110,7 @@ export class HighChartsComponent implements OnInit {
         {
           name: "Temperatures",
           type: "columnrange",
-          data: this.two
+          data: item
         }
       ]
     };
