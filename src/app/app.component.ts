@@ -29,11 +29,11 @@ export class AppComponent {
     this._weatherForecastEvent.getWeatherInfo();
   }
 
-  receiveMessage($event) {
-    this.message = $event;
-    this._weatherForecastEvent.hitBasedOnChart(this.message);
-    // alert(this.message);
-  }
+  // receiveMessage($event) {
+  //   this.message = $event;
+  //   this._weatherForecastEvent.hitBasedOnChart(this.message);
+  //   // alert(this.message);
+  // }
 
   // ngOnDestroy() {
   //   this.subscription.unsubscribe();

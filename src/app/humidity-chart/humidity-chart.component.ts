@@ -13,6 +13,6 @@ export class HumidityChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.messageEvent.emit(this.temperatureData);
+    //this.messageEvent.emit(this.temperatureData);
   }
 }

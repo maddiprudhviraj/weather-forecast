@@ -13,7 +13,7 @@ export class TemperatureChartComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<string>();
 
   ngOnInit() {
-    console.log("raja"+this.temperatureData);
-    this.messageEvent.emit(this.temperatureData);
+    //console.log("raja"+this.temperatureData);
+   // this.messageEvent.emit(this.temperatureData);
   }
 }
