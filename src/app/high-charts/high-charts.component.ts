@@ -3,9 +3,8 @@ import { WeatherForecastService } from "../weather-forecast.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
-
 import { Router } from "@angular/router";
-import { Location } from "@angular/common";
+
 addMore(Highcharts);
 
 @Component({
@@ -20,48 +19,47 @@ export class HighChartsComponent implements OnInit {
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
 
-  one = [];
-  two = [];
-
-  temperatureData1: string;
-  lessons$: any;
-  data1 = [];
-  three = [];
-
   constructor(
     private weatherService: WeatherForecastService,
-    private router: Router,
-    location: Location
+    private router: Router
   ) {
-    this.subscription = this.weatherService.trackWeatherReport.subscribe(data => {
-      this.temperatureData1 = this.router.url;
+    this.subscription = this.weatherService.trackWeatherReport.subscribe(
+      weatherHistory => {
+        let currentRoute = this.router.url;
 
-      if (data.length > 0) {
-        this.one = [];
-        this.two = [];
-        this.three = [];
-        if (this.temperatureData1 === "/temperature") {
-          data.map(item => {
-            this.one.push(item.Date);
-            this.two.push([item.temperature_low, item.temperature_high]);
-          });
+        if (weatherHistory.length > 0) {
+          let xAxisDates = [];
+          let temperatureHistory = [];
+          let humidityHistory = [];
+          if (currentRoute === "/temperature") {
+            weatherHistory.map(weatherReport => {
+              xAxisDates.push(weatherReport.Date);
+              temperatureHistory.push([
+                weatherReport.temperature_low,
+                weatherReport.temperature_high
+              ]);
+            });
 
-          this.callChart(this.two);
-        } else {
-          data.map(item => {
-            this.one.push(item.Date);
-            this.three.push([item.humidity_low, item.humidity_high]);
-          });
+            this.displayWeatherReport(xAxisDates, temperatureHistory);
+          } else {
+            weatherHistory.map(weatherReport => {
+              xAxisDates.push(weatherReport.Date);
+              humidityHistory.push([
+                weatherReport.humidity_low,
+                weatherReport.humidity_high
+              ]);
+            });
 
-          this.callChart(this.three);
+            this.displayWeatherReport(xAxisDates, humidityHistory);
+          }
         }
       }
-    });
+    );
   }
 
   ngOnInit() {}
 
-  callChart(item) {
+  displayWeatherReport(xAxisDates: string[], weatherReport: any) {
     this.chartOptions = {
       chart: {
         type: "columnrange",
@@ -74,7 +72,7 @@ export class HighChartsComponent implements OnInit {
         text: "Observed in Vik i Sogn, Norway, 2009"
       },
       xAxis: {
-        categories: this.one
+        categories: xAxisDates
       },
       yAxis: {
         title: {
@@ -108,7 +106,7 @@ export class HighChartsComponent implements OnInit {
         {
           name: "Temperatures",
           type: "columnrange",
-          data: item
+          data: weatherReport
         }
       ]
     };
