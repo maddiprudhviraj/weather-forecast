@@ -21,21 +21,16 @@ export class TabularViewComponent implements OnInit {
     resizable: true
   };
 
-  temperatureData1: string;
-  one: any;
-  two: any;
-  three: any;
-
   constructor(
     private weatherService: WeatherForecastService,
     private router: Router
   ) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
       data => {
-        this.temperatureData1 = this.router.url;
+        let currentRoute = this.router.url;
         if (data.length > 0) {
           this.rowData = [];
-          if (this.temperatureData1 === "/temperature") {
+          if (currentRoute === "/temperature") {
             data.map(item => {
               this.rowData.push({
                 Date: item.Date,
@@ -56,8 +51,6 @@ export class TabularViewComponent implements OnInit {
       }
     );
   }
-
-  callTable(item) {}
 
   ngOnInit() {}
 }
