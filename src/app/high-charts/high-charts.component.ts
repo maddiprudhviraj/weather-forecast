@@ -20,7 +20,7 @@ export class HighChartsComponent implements OnInit {
 
   constructor(
     private weatherService: WeatherForecastService,
-    private router: Router,
+    private router: Router
   ) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
       weatherHistory => {
