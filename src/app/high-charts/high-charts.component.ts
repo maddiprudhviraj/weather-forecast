@@ -20,7 +20,7 @@ export class HighChartsComponent implements OnInit {
 
   constructor(
     private weatherService: WeatherForecastService,
-    private router: Router
+    private router: Router,
   ) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
       weatherHistory => {
@@ -39,11 +39,11 @@ export class HighChartsComponent implements OnInit {
               ]);
             });
 
-            this.displayWeatherReport(
-              xAxisDates,
-              temperatureHistory,
-              ["Temperature","Temperature ( \xB0C )", "\xB0C"]
-            );
+            this.displayWeatherReport(xAxisDates, temperatureHistory, [
+              "Temperature",
+              "Temperature ( \xB0C )",
+              "\xB0C"
+            ]);
           } else {
             weatherHistory.map(weatherReport => {
               xAxisDates.push(weatherReport.Date);
@@ -53,11 +53,11 @@ export class HighChartsComponent implements OnInit {
               ]);
             });
 
-            this.displayWeatherReport(
-              xAxisDates,
-              humidityHistory,
-              ["Humidity","Humidity ( %rh )", "%"]
-            );
+            this.displayWeatherReport(xAxisDates, humidityHistory, [
+              "Humidity",
+              "Humidity ( %rh )",
+              "%"
+            ]);
           }
         }
       }

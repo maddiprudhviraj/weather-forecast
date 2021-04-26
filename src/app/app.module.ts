@@ -14,6 +14,7 @@ import { TemperatureChartComponent } from "./temperature-chart/temperature-chart
 import { HumidityChartComponent } from "./humidity-chart/humidity-chart.component";
 import { WeatherForecastEvent } from "./weather-forecast-event";
 import { AppRoutingModule } from "./app-routing.module";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -25,8 +26,8 @@ import { AppRoutingModule } from "./app-routing.module";
     HttpClientModule,
     AgGridModule.withComponents([]),
     HighchartsChartModule,
-    AppRoutingModule
-    
+    AppRoutingModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
