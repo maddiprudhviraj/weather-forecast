@@ -6,6 +6,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
   styleUrls: ["./temperature-chart.component.css"]
 })
 export class TemperatureChartComponent implements OnInit {
+  
   constructor() {}
 
   ngOnInit() {}

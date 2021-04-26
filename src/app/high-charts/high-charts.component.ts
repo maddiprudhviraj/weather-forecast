@@ -13,7 +13,6 @@ addMore(Highcharts);
   styleUrls: ["./high-charts.component.css"]
 })
 export class HighChartsComponent implements OnInit {
-  message: string;
   subscription: Subscription;
 
   highcharts = Highcharts;
@@ -40,7 +39,11 @@ export class HighChartsComponent implements OnInit {
               ]);
             });
 
-            this.displayWeatherReport(xAxisDates, temperatureHistory);
+            this.displayWeatherReport(
+              xAxisDates,
+              temperatureHistory,
+              "Temperature ( \xB0C )"
+            );
           } else {
             weatherHistory.map(weatherReport => {
               xAxisDates.push(weatherReport.Date);
@@ -50,7 +53,11 @@ export class HighChartsComponent implements OnInit {
               ]);
             });
 
-            this.displayWeatherReport(xAxisDates, humidityHistory);
+            this.displayWeatherReport(
+              xAxisDates,
+              humidityHistory,
+              "Humidity ( %rh )"
+            );
           }
         }
       }
@@ -59,14 +66,18 @@ export class HighChartsComponent implements OnInit {
 
   ngOnInit() {}
 
-  displayWeatherReport(xAxisDates: string[], weatherReport: any) {
+  displayWeatherReport(
+    xAxisDates: string[],
+    weatherReport: any,
+    yAxisTitle: string
+  ) {
     this.chartOptions = {
       chart: {
         type: "columnrange",
         inverted: false
       },
       title: {
-        text: "Temperature variation by month"
+        text: "Weaher Report of last 30 Days"
       },
       subtitle: {
         text: "Observed in Vik i Sogn, Norway, 2009"
@@ -76,7 +87,7 @@ export class HighChartsComponent implements OnInit {
       },
       yAxis: {
         title: {
-          text: "Temperature ( \xB0C )"
+          text: yAxisTitle
         }
       },
       tooltip: {
