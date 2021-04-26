@@ -1,22 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { WeatherForecastService } from "../weather-forecast.service";
-import { Subject, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
-import {
-  first,
-  share,
-  shareReplay,
-  single,
-  skipWhile,
-  take,
-  takeUntil,
-  withLatestFrom
-} from "rxjs/operators";
-import { skip } from "rxjs/operator/skip";
-import { WeatherForecastEvent } from "../weather-forecast-event";
 import { Router } from "@angular/router";
-import { Location } from "@angular/common";
+
 addMore(Highcharts);
 
 @Component({
@@ -25,99 +13,92 @@ addMore(Highcharts);
   styleUrls: ["./high-charts.component.css"]
 })
 export class HighChartsComponent implements OnInit {
-  message: string;
   subscription: Subscription;
-
-  // private destroy = new Subject();
 
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
 
-  one = [];
-  two = [];
-
-  temperatureData1: string;
-  lessons$: any;
-  data1 = [];
-  three = [];
-
   constructor(
     private weatherService: WeatherForecastService,
     private router: Router,
-    location: Location
   ) {
-    // alert("high comp")
-    this.subscription = this.weatherService.trackFlag.subscribe(data => {
-      // console.log(this.router.url);
-      this.temperatureData1 = this.router.url;
+    this.subscription = this.weatherService.trackWeatherReport.subscribe(
+      weatherHistory => {
+        let currentRoute = this.router.url;
 
-      if (data.length > 0) {
-        console.log(JSON.stringify(data));
-        // console.log(JSON.stringify(data[2]));
-        // this.one = data;
-        // console.log(JSON.stringify(this.one))
-        this.one = [];
-        this.two = [];
-        this.three = [];
-        if (this.temperatureData1 === "/temperature") {
-          data.map(item => {
-            this.one.push(item.Date);
-            this.two.push([item.temp_low, item.temp_high]);
-          });
-          // console.log(this.two)
-          this.callChart(this.two);
-        } else {
-          data.map(item => {
-            this.one.push(item.Date);
-            this.three.push([item.hum_low, item.hum_high]);
-          });
-          // console.log(this.three)
+        if (weatherHistory.length > 0) {
+          let xAxisDates = [];
+          let temperatureHistory = [];
+          let humidityHistory = [];
+          if (currentRoute === "/temperature") {
+            weatherHistory.map(weatherReport => {
+              xAxisDates.push(weatherReport.Date);
+              temperatureHistory.push([
+                weatherReport.temperature_low,
+                weatherReport.temperature_high
+              ]);
+            });
 
-          this.callChart(this.three);
+            this.displayWeatherReport(xAxisDates, temperatureHistory, [
+              "Temperature",
+              "Temperature ( \xB0C )",
+              "\xB0C"
+            ]);
+          } else {
+            weatherHistory.map(weatherReport => {
+              xAxisDates.push(weatherReport.Date);
+              humidityHistory.push([
+                weatherReport.humidity_low,
+                weatherReport.humidity_high
+              ]);
+            });
+
+            this.displayWeatherReport(xAxisDates, humidityHistory, [
+              "Humidity",
+              "Humidity ( %rh )",
+              "%"
+            ]);
+          }
         }
       }
-    });
+    );
   }
 
   ngOnInit() {}
 
-  callChart(item) {
-    // alert("hello")
+  displayWeatherReport(
+    xAxisDates: string[],
+    weatherReport: any,
+    yAxisTitle: string[]
+  ) {
     this.chartOptions = {
       chart: {
         type: "columnrange",
         inverted: false
       },
       title: {
-        text: "Temperature variation by month"
+        text: "Weather Report of last 30 Days"
       },
       subtitle: {
-        text: "Observed in Vik i Sogn, Norway, 2009"
+        text: "Report on Every Individual Date"
       },
       xAxis: {
-        categories: this.one
+        categories: xAxisDates
       },
       yAxis: {
         title: {
-          text: "Temperature ( \xB0C )"
+          text: yAxisTitle[1]
         }
       },
       tooltip: {
-        headerFormat:
-          '<span style = "font-size:10px">{point.key}</span><table>',
-        pointFormat:
-          '<tr><td style = "color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style = "padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: "</table>",
-        shared: true,
-        useHTML: true
+        valueSuffix: yAxisTitle[2]
       },
       plotOptions: {
         columnrange: {
           dataLabels: {
             enabled: true,
             formatter: function() {
-              return this.y + "\xB0C";
+              return this.y + yAxisTitle[2];
             }
           }
         }
@@ -127,16 +108,15 @@ export class HighChartsComponent implements OnInit {
       },
       series: [
         {
-          name: "Temperatures",
+          name: yAxisTitle[0],
           type: "columnrange",
-          data: item
+          data: weatherReport
         }
       ]
     };
   }
 
   ngOnDestroy() {
-    // this.destroy.next();
     this.subscription.unsubscribe();
   }
 }

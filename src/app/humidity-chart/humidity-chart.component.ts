@@ -7,14 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 })
 export class HumidityChartComponent implements OnInit {
   
+  constructor() {}
 
-  // @Output() messageEvent = new EventEmitter<string>();
-
-  constructor() {
-    // alert("hd comp");
-  }
-
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 }

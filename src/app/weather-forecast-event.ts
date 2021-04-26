@@ -1,4 +1,4 @@
-import { Injectable, Input } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { WeatherForecastService } from "./weather-forecast.service";
 import moment from "moment";
 
@@ -6,43 +6,40 @@ import moment from "moment";
 export class WeatherForecastEvent {
   constructor(private weatherService: WeatherForecastService) {}
 
-  addTemp = [];
-  addHumidity = [];
-  addFourOne = [];
-
-  getWeatherInfo(selectedDate) {
-    const listOfIntervals = [0, 1, 2, 3, 4, 5, 6, 7];
-    let addFour = [];
-    listOfIntervals.forEach(function(interval) {
-      let currentLoop = moment(selectedDate)
+  getWeatherInfo(selectedDate?: Date) {
+    const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
+    let dynamicDates = [];
+    generateDates.forEach(function(generateDate) {
+      let date = moment(selectedDate)
         .subtract(30, "days")
-        .add(interval * 4, "days")
+        .add(generateDate * 4, "days")
         .format("YYYY-MM-DD[T]HH:mm:ss");
-      addFour.push(currentLoop);
+      dynamicDates.push(date);
     });
-    console.log("Der" + JSON.stringify(addFour));
-    this.weatherService.getFourForecastData(...addFour).subscribe(
-      forecastWeatherInfo => {
-        // console.log("Hello" + JSON.stringify(forecastWeatherInfo));
-        this.addFourOne = [];
-        forecastWeatherInfo.map(individual => {
-          if (individual.items[0].forecasts) {
-            individual.items[0].forecasts.map(fore => {
-              this.addFourOne.push({
-                Date: fore.date,
-                temp_low: fore.temperature.low,
-                temp_high: fore.temperature.high,
-                hum_low: fore.relative_humidity.low,
-                hum_high: fore.relative_humidity.high
-              });
-            });
+    this.weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
+      weatherDataResponse => {
+        let weatherDataReport = [];
+        weatherDataResponse.map(dateWeatherReport => {
+          if (dateWeatherReport.items[0].forecasts) {
+            dateWeatherReport.items[0].forecasts.map(
+              (forecastData: {
+                date: string;
+                temperature: { low: number; high: number };
+                relative_humidity: { low: number; high: number };
+              }) => {
+                weatherDataReport.push({
+                  Date: forecastData.date,
+                  temperature_low: forecastData.temperature.low,
+                  temperature_high: forecastData.temperature.high,
+                  humidity_low: forecastData.relative_humidity.low,
+                  humidity_high: forecastData.relative_humidity.high
+                });
+              }
+            );
           }
         });
-        // this.weatherService.appchangeFlag("ItsoK");
-        const dynamicData = this.addTemp;
-        const hunData = this.addHumidity;
 
-        this.weatherService.changeFlag(this.addFourOne);
+        this.weatherService.weatherReport(weatherDataReport);
       },
       err => {
         console.log("HTTP Error", err);
