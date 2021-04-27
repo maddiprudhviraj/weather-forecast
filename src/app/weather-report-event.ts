@@ -1,12 +1,17 @@
 import { Injectable } from "@angular/core";
 import { WeatherReportService } from "./weather-report.service";
 import moment from "moment";
+import { LoadingScreenService } from "./loading-screen.service";
 
 @Injectable()
 export class WeatherReportEvent {
-  constructor(private weatherService: WeatherReportService) {}
+  constructor(
+    private weatherService: WeatherReportService,
+    private loadingScreenService: LoadingScreenService
+  ) {}
 
   getWeatherInfo(selectedDate?: Date) {
+    this.loadingScreenService.startLoading();
     // const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
     const generateDates = [...Array(8).keys()];
     let dynamicDates = [];
@@ -41,8 +46,10 @@ export class WeatherReportEvent {
         });
 
         this.weatherService.weatherReport(weatherDataReport.reverse());
+        this.loadingScreenService.stopLoading();
       },
       err => {
+        this.loadingScreenService.stopLoading();
         console.log("HTTP Error", err);
       }
     );
