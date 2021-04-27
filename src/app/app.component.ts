@@ -2,7 +2,7 @@ import { Component, Inject } from "@angular/core";
 import { WeatherReportEvent } from "./weather-report-event";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { LoadingScreenService } from "./loading-screen.service";
+import { LoadingScreenService } from "./services/loading-screen.service";
 import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
 
 @Component({

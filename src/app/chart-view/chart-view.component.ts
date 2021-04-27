@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { WeatherReportService } from "../weather-report.service";
+import { WeatherReportService } from "../services/weather-report.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";

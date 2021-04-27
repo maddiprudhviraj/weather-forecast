@@ -5,7 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { TabularViewComponent } from "./tabular-view/tabular-view.component";
 import { AgGridModule } from "ag-grid-angular";
-import { WeatherReportService } from "./weather-report.service";
+import { WeatherReportService } from "./services/weather-report.service";
 import { ChartViewComponent } from "./chart-view/chart-view.component";
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from "highcharts-angular";

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
-import { WeatherReportService } from "./weather-report.service";
+import { WeatherReportService } from "./services/weather-report.service";
 import moment from "moment";
-import { LoadingScreenService } from "./loading-screen.service";
+import { LoadingScreenService } from "./services/loading-screen.service";
 
 @Injectable()
 export class WeatherReportEvent {
