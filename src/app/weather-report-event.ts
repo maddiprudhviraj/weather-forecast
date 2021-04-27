@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { WeatherReportService } from "./weather-forecast.service";
+import { WeatherReportService } from "./weather-report.service";
 import moment from "moment";
 
 @Injectable()
