@@ -37,7 +37,7 @@ export class AppComponent {
       this._weather_Forecast_Days
     );
     this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe(
-      value => {
+      (value: boolean) => {
         this.loading = value;
       }
     );

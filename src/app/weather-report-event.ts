@@ -48,7 +48,12 @@ export class WeatherReportEvent {
           }
         });
         const updatedWeatherReport = weatherDataReport.reverse().slice(2);
-        this.weatherService.weatherReport(updatedWeatherReport);
+        console.log("hello" + updatedWeatherReport.length);
+        if (updatedWeatherReport.length === 0) {
+          alert("No Weather Data avaliable");
+        } else {
+          this.weatherService.weatherReport(updatedWeatherReport);
+        }
         this.loadingScreenService.stopLoading();
       },
       err => {

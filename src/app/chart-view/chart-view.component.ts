@@ -69,7 +69,7 @@ export class ChartViewComponent implements OnInit {
 
   displayWeatherReport(
     xAxisDates: string[],
-    weatherReport: WeatherReport,
+    weatherReport: any,
     yAxisTitle: string[]
   ) {
     this.chartOptions = {
