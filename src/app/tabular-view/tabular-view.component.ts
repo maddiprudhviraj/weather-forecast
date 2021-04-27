@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { WeatherReportService } from "../weather-report.service";
+import { WeatherReportService } from "../services/weather-report.service";
 
 @Component({
   selector: "app-tabular-view",

@@ -1,21 +1,22 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, forkJoin, Subject } from "rxjs";
+import { Observable, forkJoin } from "rxjs";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { WeatherReport } from "../../weather-report-model";
 
 @Injectable()
 export class WeatherReportService {
-  public weatherData = new BehaviorSubject<any[]>([]);
+  public weatherData = new BehaviorSubject<WeatherReport[]>([]);
 
   trackWeatherReport = this.weatherData.asObservable();
 
-  weatherReport(weatherDataReport: any[]) {
+  weatherReport(weatherDataReport: WeatherReport[]) {
     this.weatherData.next(weatherDataReport);
   }
 
   constructor(private http: HttpClient) {}
 
-  getWeatherReportHistory(...dates: any[]): Observable<any[]> {
+  getWeatherReportHistory(...dates: Date[]): Observable<any[]> {
     let weatherInfoFromDates = [];
     dates.map(date => {
       weatherInfoFromDates.push(

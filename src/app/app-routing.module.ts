@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { TemperatureChartComponent } from "./temperature-chart/temperature-chart.component";
-import { HumidityChartComponent } from "./humidity-chart/humidity-chart.component";
+import { TemperatureReportComponent } from "./temperature-report/temperature-report.component";
+import { HumidityReportComponent } from "./humidity-report/humidity-report.component";
 
 const routes: Routes = [
-  { path: "temperature", component: TemperatureChartComponent },
-  { path: "humidity", component: HumidityChartComponent },
+  { path: "temperature", component: TemperatureReportComponent },
+  { path: "humidity", component: HumidityReportComponent },
   { path: "", redirectTo: "/temperature", pathMatch: "full" }
 ];
 
