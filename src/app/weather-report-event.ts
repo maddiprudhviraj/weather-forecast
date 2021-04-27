@@ -1,21 +1,28 @@
 import { Injectable } from "@angular/core";
-import { WeatherForecastService } from "./weather-forecast.service";
+import { WeatherReportService } from "./weather-report.service";
 import moment from "moment";
+import { LoadingScreenService } from "./loading-screen.service";
 
 @Injectable()
-export class WeatherForecastEvent {
-  constructor(private weatherService: WeatherForecastService) {}
+export class WeatherReportEvent {
+  constructor(
+    private weatherService: WeatherReportService,
+    private loadingScreenService: LoadingScreenService
+  ) {}
 
   getWeatherInfo(selectedDate?: Date) {
-    const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
+    this.loadingScreenService.startLoading();
+    // const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
+    const generateDates = [...Array(8).keys()];
     let dynamicDates = [];
     generateDates.forEach(function(generateDate) {
       let date = moment(selectedDate)
         .subtract(30, "days")
         .add(generateDate * 4, "days")
-        .format("YYYY-MM-DD[T]HH:mm:ss");
+        .format("YYYY-MM-DD[T]" + new Date().getHours() + ":mm:ss");
       dynamicDates.push(date);
     });
+    console.log(dynamicDates);
     this.weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
       weatherDataResponse => {
         let weatherDataReport = [];
@@ -38,10 +45,12 @@ export class WeatherForecastEvent {
             );
           }
         });
-
-        this.weatherService.weatherReport(weatherDataReport.reverse());
+        const updatedWeatherReport = weatherDataReport.reverse().slice(2);
+        this.weatherService.weatherReport(updatedWeatherReport);
+        this.loadingScreenService.stopLoading();
       },
       err => {
+        this.loadingScreenService.stopLoading();
         console.log("HTTP Error", err);
       }
     );

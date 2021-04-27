@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { WeatherForecastService } from "../weather-forecast.service";
+import { WeatherReportService } from "../weather-report.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
@@ -19,7 +19,7 @@ export class HighChartsComponent implements OnInit {
   chartOptions: Highcharts.Options;
 
   constructor(
-    private weatherService: WeatherForecastService,
+    private weatherService: WeatherReportService,
     private router: Router
   ) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
