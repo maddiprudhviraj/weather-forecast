@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
-import { WeatherForecastService } from "./weather-forecast.service";
+import { WeatherReportService } from "./weather-forecast.service";
 import moment from "moment";
 
 @Injectable()
-export class WeatherForecastEvent {
-  constructor(private weatherService: WeatherForecastService) {}
+export class WeatherReportEvent {
+  constructor(private weatherService: WeatherReportService) {}
 
   getWeatherInfo(selectedDate?: Date) {
-    const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
+    // const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
+    const generateDates = [...Array(8).keys()];
     let dynamicDates = [];
     generateDates.forEach(function(generateDate) {
       let date = moment(selectedDate)

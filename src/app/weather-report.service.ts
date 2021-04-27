@@ -4,7 +4,7 @@ import { Observable, forkJoin, Subject } from "rxjs";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
-export class WeatherForecastService {
+export class WeatherReportService {
   public weatherData = new BehaviorSubject<any[]>([]);
 
   trackWeatherReport = this.weatherData.asObservable();

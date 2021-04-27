@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { WeatherForecastService } from "../weather-forecast.service";
+import { WeatherReportService } from "../weather-forecast.service";
 
 @Component({
   selector: "app-tabular-view",
@@ -22,7 +22,7 @@ export class TabularViewComponent implements OnInit {
   };
 
   constructor(
-    private weatherService: WeatherForecastService,
+    private weatherService: WeatherReportService,
     private router: Router
   ) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(

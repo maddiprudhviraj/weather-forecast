@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { WeatherForecastEvent } from "./weather-forecast-event";
+import { WeatherReportEvent } from "./weather-report-event";
 import { Router } from "@angular/router";
 
 @Component({
@@ -11,7 +11,7 @@ export class AppComponent {
   isSelectedNewDate: boolean;
 
   constructor(
-    private _weatherForecastEvent: WeatherForecastEvent,
+    private _weatherReportEvent: WeatherReportEvent,
     private router: Router
   ) {}
 
@@ -24,11 +24,11 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this._weatherForecastEvent.getWeatherInfo();
+    this._weatherReportEvent.getWeatherInfo();
   }
 
   changeDate(selectedDate: Date) {
-    this._weatherForecastEvent.getWeatherInfo(selectedDate);
+    this._weatherReportEvent.getWeatherInfo(selectedDate);
   }
 
   navigatePage(redirect: string) {
