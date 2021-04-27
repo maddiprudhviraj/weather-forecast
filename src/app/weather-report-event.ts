@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { WeatherReportService } from "./weather-report.service";
 import moment from "moment";
 import { LoadingScreenService } from "./loading-screen.service";
@@ -10,15 +10,19 @@ export class WeatherReportEvent {
     private loadingScreenService: LoadingScreenService
   ) {}
 
-  getWeatherInfo(selectedDate?: Date) {
+  getWeatherInfo(
+    reportDays: number,
+    forecastDays: number,
+    selectedDate?: Date
+  ) {
     this.loadingScreenService.startLoading();
     // const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
     const generateDates = [...Array(8).keys()];
     let dynamicDates = [];
     generateDates.forEach(function(generateDate) {
       let date = moment(selectedDate)
-        .subtract(30, "days")
-        .add(generateDate * 4, "days")
+        .subtract(reportDays, "days")
+        .add(generateDate * forecastDays, "days")
         .format("YYYY-MM-DD[T]" + new Date().getHours() + ":mm:ss");
       dynamicDates.push(date);
     });

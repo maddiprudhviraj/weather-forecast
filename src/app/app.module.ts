@@ -15,6 +15,7 @@ import { HumidityReportComponent } from "./humidity-report/humidity-report.compo
 import { WeatherReportEvent } from "./weather-report-event";
 import { AppRoutingModule } from "./app-routing.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
 
 @NgModule({
   imports: [
@@ -34,6 +35,18 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     HumidityReportComponent
   ],
   bootstrap: [AppComponent],
-  providers: [WeatherReportService, DatePipe, WeatherReportEvent]
+  providers: [
+    WeatherReportService,
+    DatePipe,
+    WeatherReportEvent,
+    {
+      provide: Weather_Report_Days,
+      useValue: 30
+    },
+    {
+      provide: Weather_Forecast_Days,
+      useValue: 4
+    }
+  ]
 })
 export class AppModule {}

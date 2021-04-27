@@ -1,8 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { WeatherReportEvent } from "./weather-report-event";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { LoadingScreenService } from "./loading-screen.service";
+import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
 
 @Component({
   selector: "my-app",
@@ -17,7 +18,9 @@ export class AppComponent {
   constructor(
     private _weatherReportEvent: WeatherReportEvent,
     private router: Router,
-    private loadingScreenService: LoadingScreenService
+    private loadingScreenService: LoadingScreenService,
+    @Inject(Weather_Report_Days) private _weather_Report_Days: number,
+    @Inject(Weather_Forecast_Days) private _weather_Forecast_Days: number
   ) {}
 
   disableFutureDates(): string {
@@ -29,7 +32,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this._weatherReportEvent.getWeatherInfo();
+    this._weatherReportEvent.getWeatherInfo(
+      this._weather_Report_Days,
+      this._weather_Forecast_Days
+    );
     this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe(
       value => {
         this.loading = value;
@@ -38,7 +44,11 @@ export class AppComponent {
   }
 
   changeDate(selectedDate: Date) {
-    this._weatherReportEvent.getWeatherInfo(selectedDate);
+    this._weatherReportEvent.getWeatherInfo(
+      this._weather_Report_Days,
+      this._weather_Forecast_Days,
+      selectedDate
+    );
   }
 
   navigatePage(redirect: string) {
