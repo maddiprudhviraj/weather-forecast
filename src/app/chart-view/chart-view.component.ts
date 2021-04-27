@@ -8,11 +8,11 @@ import { Router } from "@angular/router";
 addMore(Highcharts);
 
 @Component({
-  selector: "app-high-charts",
-  templateUrl: "./high-charts.component.html",
-  styleUrls: ["./high-charts.component.css"]
+  selector: "app-chart-view",
+  templateUrl: "./chart-view.component.html",
+  styleUrls: ["./chart-view.component.css"]
 })
-export class HighChartsComponent implements OnInit {
+export class ChartViewComponent implements OnInit {
   subscription: Subscription;
 
   highcharts = Highcharts;
