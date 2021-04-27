@@ -22,7 +22,6 @@ export class WeatherReportEvent {
         .format("YYYY-MM-DD[T]" + new Date().getHours() + ":mm:ss");
       dynamicDates.push(date);
     });
-    console.log(dynamicDates);
     this.weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
       weatherDataResponse => {
         let weatherDataReport = [];
