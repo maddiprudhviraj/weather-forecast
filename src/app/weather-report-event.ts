@@ -16,7 +16,6 @@ export class WeatherReportEvent {
     selectedDate?: Date
   ) {
     this.loadingScreenService.startLoading();
-    // const generateDates = [0, 1, 2, 3, 4, 5, 6, 7];
     const generateDates = [...Array(8).keys()];
     let dynamicDates = [];
     generateDates.forEach(function(generateDate) {
