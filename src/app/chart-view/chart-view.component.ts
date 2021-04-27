@@ -29,37 +29,25 @@ export class ChartViewComponent implements OnInit {
 
         if (weatherHistory.length > 0) {
           let xAxisDates = [];
-          let temperatureHistory = [];
-          let humidityHistory = [];
-          if (currentRoute === "/temperature") {
-            weatherHistory.map(weatherReport => {
-              xAxisDates.push(weatherReport.Date);
-              temperatureHistory.push([
-                weatherReport.temperature_low,
-                weatherReport.temperature_high
-              ]);
-            });
+          let weatherData = [];
 
-            this.displayWeatherReport(xAxisDates, temperatureHistory, [
-              "Temperature",
-              "Temperature ( \xB0C )",
-              "\xB0C"
-            ]);
-          } else {
-            weatherHistory.map(weatherReport => {
-              xAxisDates.push(weatherReport.Date);
-              humidityHistory.push([
-                weatherReport.humidity_low,
-                weatherReport.humidity_high
-              ]);
-            });
+          weatherHistory.map(weatherReport => {
+            xAxisDates.push(weatherReport.Date);
+            weatherData.push(
+              currentRoute === "/temperature"
+                ? [
+                    weatherReport.temperature_low,
+                    weatherReport.temperature_high
+                  ]
+                : [weatherReport.humidity_low, weatherReport.humidity_high]
+            );
+          });
 
-            this.displayWeatherReport(xAxisDates, humidityHistory, [
-              "Humidity",
-              "Humidity ( % )",
-              "%"
-            ]);
-          }
+          this.displayWeatherReport(
+            xAxisDates,
+            weatherData,
+            currentRoute === "/temperature" ? "Temperature \xB0C" : "Humidity %"
+          );
         }
       }
     );
@@ -70,7 +58,7 @@ export class ChartViewComponent implements OnInit {
   displayWeatherReport(
     xAxisDates: string[],
     weatherReport: any,
-    yAxisTitle: string[]
+    yAxisTitle: string
   ) {
     this.chartOptions = {
       chart: {
@@ -78,7 +66,7 @@ export class ChartViewComponent implements OnInit {
         inverted: false
       },
       title: {
-        text: yAxisTitle[0] + " " + "Report of last 30 Days"
+        text: yAxisTitle.split(" ")[0] + " " + "Report of last 30 Days"
       },
       subtitle: {
         text: "Weather Report"
@@ -88,18 +76,18 @@ export class ChartViewComponent implements OnInit {
       },
       yAxis: {
         title: {
-          text: yAxisTitle[1]
+          text: yAxisTitle
         }
       },
       tooltip: {
-        valueSuffix: yAxisTitle[2]
+        valueSuffix: yAxisTitle.split(" ")[1]
       },
       plotOptions: {
         columnrange: {
           dataLabels: {
             enabled: true,
             formatter: function() {
-              return this.y + yAxisTitle[2];
+              return this.y + yAxisTitle.split(" ")[1];
             }
           }
         }
@@ -109,7 +97,7 @@ export class ChartViewComponent implements OnInit {
       },
       series: [
         {
-          name: yAxisTitle[0],
+          name: yAxisTitle.split(" ")[0],
           type: "columnrange",
           data: weatherReport
         }
