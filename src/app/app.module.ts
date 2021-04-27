@@ -9,13 +9,13 @@ import { WeatherReportService } from "./services/weather-report.service";
 import { ChartViewComponent } from "./chart-view/chart-view.component";
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from "highcharts-angular";
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DatePipe } from "@angular/common";
 import { TemperatureReportComponent } from "./temperature-report/temperature-report.component";
 import { HumidityReportComponent } from "./humidity-report/humidity-report.component";
 import { WeatherReportEvent } from "./weather-report-event";
 import { AppRoutingModule } from "./app-routing.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
 
 @NgModule({
@@ -25,8 +25,8 @@ import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
     HttpClientModule,
     AgGridModule.withComponents([]),
     HighchartsChartModule,
-    MatSnackBarModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     NgbModule
   ],
   declarations: [

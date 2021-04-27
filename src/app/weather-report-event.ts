@@ -1,15 +1,14 @@
 import { Inject, Injectable } from "@angular/core";
 import { WeatherReportService } from "./services/weather-report.service";
 import moment from "moment";
-import {MatSnackBar} from '@angular/material/snack-bar';
 import { LoadingScreenService } from "./services/loading-screen.service";
+
 
 @Injectable()
 export class WeatherReportEvent {
   constructor(
     private weatherService: WeatherReportService,
     private loadingScreenService: LoadingScreenService,
-    private _snackBar: MatSnackBar
   ) {}
 
   getWeatherInfo(
@@ -52,8 +51,7 @@ export class WeatherReportEvent {
         const updatedWeatherReport = weatherDataReport.reverse().slice(2);
         console.log("hello" + updatedWeatherReport.length);
         if (updatedWeatherReport.length === 0) {
-          // alert("No Weather Data avaliable");
-          this._snackBar.open("No Weather Data avaliable");
+       
         } else {
           this.weatherService.weatherReport(updatedWeatherReport);
         }
