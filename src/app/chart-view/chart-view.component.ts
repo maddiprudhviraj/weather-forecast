@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { WeatherReportService } from "../services/weather-report.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
@@ -55,7 +55,7 @@ export class ChartViewComponent implements OnInit {
 
             this.displayWeatherReport(xAxisDates, humidityHistory, [
               "Humidity",
-              "Humidity ( %rh )",
+              "Humidity ( % )",
               "%"
             ]);
           }
@@ -77,10 +77,10 @@ export class ChartViewComponent implements OnInit {
         inverted: false
       },
       title: {
-        text: yAxisTitle[0]+" "+"Report of last 30 Days"
+        text: yAxisTitle[0] + " " + "Report of last 30 Days"
       },
       subtitle: {
-        text: "Report on Every Individual Date"
+        text: "Weather Report"
       },
       xAxis: {
         categories: xAxisDates
