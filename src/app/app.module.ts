@@ -9,6 +9,7 @@ import { WeatherReportService } from "./services/weather-report.service";
 import { ChartViewComponent } from "./chart-view/chart-view.component";
 import { HttpClientModule } from "@angular/common/http";
 import { HighchartsChartModule } from "highcharts-angular";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DatePipe } from "@angular/common";
 import { TemperatureReportComponent } from "./temperature-report/temperature-report.component";
 import { HumidityReportComponent } from "./humidity-report/humidity-report.component";
@@ -24,6 +25,7 @@ import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
     HttpClientModule,
     AgGridModule.withComponents([]),
     HighchartsChartModule,
+    MatSnackBarModule,
     AppRoutingModule,
     NgbModule
   ],
