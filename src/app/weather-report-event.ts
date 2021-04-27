@@ -45,8 +45,8 @@ export class WeatherReportEvent {
             );
           }
         });
-
-        this.weatherService.weatherReport(weatherDataReport.reverse());
+        const updatedWeatherReport = weatherDataReport.reverse().slice(2);
+        this.weatherService.weatherReport(updatedWeatherReport);
         this.loadingScreenService.stopLoading();
       },
       err => {
