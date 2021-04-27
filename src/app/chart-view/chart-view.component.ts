@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
 import { Router } from "@angular/router";
+import { WeatherReport } from "../../weather-report-model";
 
 addMore(Highcharts);
 
@@ -68,7 +69,7 @@ export class ChartViewComponent implements OnInit {
 
   displayWeatherReport(
     xAxisDates: string[],
-    weatherReport: any,
+    weatherReport: WeatherReport,
     yAxisTitle: string[]
   ) {
     this.chartOptions = {
