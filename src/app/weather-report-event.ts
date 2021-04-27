@@ -19,9 +19,10 @@ export class WeatherReportEvent {
       let date = moment(selectedDate)
         .subtract(30, "days")
         .add(generateDate * 4, "days")
-        .format("YYYY-MM-DD[T]HH:mm:ss");
+        .format("YYYY-MM-DD[T]" + new Date().getHours() + ":mm:ss");
       dynamicDates.push(date);
     });
+    console.log(dynamicDates);
     this.weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
       weatherDataResponse => {
         let weatherDataReport = [];

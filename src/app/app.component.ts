@@ -11,8 +11,8 @@ import { LoadingScreenService } from "./loading-screen.service";
 })
 export class AppComponent {
   isSelectedNewDate: boolean;
-   loading: boolean = false;
-   loadingSubscription: Subscription;
+  loading: boolean = false;
+  loadingSubscription: Subscription;
 
   constructor(
     private _weatherReportEvent: WeatherReportEvent,
@@ -30,9 +30,11 @@ export class AppComponent {
 
   ngOnInit() {
     this._weatherReportEvent.getWeatherInfo();
-    this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe((value) => {
-      this.loading = value;
-    });
+    this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe(
+      value => {
+        this.loading = value;
+      }
+    );
   }
 
   changeDate(selectedDate: Date) {
@@ -43,8 +45,7 @@ export class AppComponent {
     this.router.navigateByUrl(redirect);
   }
 
-   ngOnDestroy() {
+  ngOnDestroy() {
     this.loadingSubscription.unsubscribe();
   }
-  
 }
