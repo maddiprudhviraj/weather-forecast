@@ -4,9 +4,9 @@ import { TemperatureReportComponent } from "./temperature-report/temperature-rep
 import { HumidityReportComponent } from "./humidity-report/humidity-report.component";
 
 const routes: Routes = [
-  { path: "temperature", component: TemperatureReportComponent },
-  { path: "humidity", component: HumidityReportComponent },
-  { path: "", redirectTo: "/temperature", pathMatch: "full" }
+  { path: "Temperature", component: TemperatureReportComponent },
+  { path: "Humidity", component: HumidityReportComponent },
+  { path: "", redirectTo: "/Temperature", pathMatch: "full" }
 ];
 
 @NgModule({
