@@ -1,31 +1,35 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Weather_Forecast_Days, Weather_Report_Days } from "../injection.tokens";
-import { Router } from '@angular/router';
-import { WeatherReportEvent } from '../weather-report-event';
+import { Component, Inject, OnInit } from "@angular/core";
+import {
+  Weather_Forecast_Days,
+  Weather_Report_Days
+} from "../injection.tokens";
+import { Router } from "@angular/router";
+import { WeatherReportEvent } from "../weather-report-event";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
-isSelectedNewDate: boolean;
-  constructor(private router: Router,
+  isSelectedNewDate: boolean;
+  constructor(
+    private router: Router,
     private _weatherReportEvent: WeatherReportEvent,
     @Inject(Weather_Report_Days) private _weather_Report_Days: number,
-    @Inject(Weather_Forecast_Days) private _weather_Forecast_Days: number) { }
+    @Inject(Weather_Forecast_Days) private _weather_Forecast_Days: number
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-disableFutureDates(): string {
+  disableFutureDates(): string {
     return new Date().toISOString().split("T")[0];
   }
 
   dateSelected() {
     this.isSelectedNewDate = true;
   }
-  
+
   changeDate(selectedDate: Date) {
     this._weatherReportEvent.getWeatherInfo(
       this._weather_Report_Days,
@@ -37,5 +41,4 @@ disableFutureDates(): string {
   navigatePage(redirect: string) {
     this.router.navigateByUrl(redirect);
   }
-
 }

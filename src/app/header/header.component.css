@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  border-bottom: 1px solid;
+  padding-bottom: 10px;
 }
 
 .header-left-text {
@@ -14,4 +16,20 @@
 
 .btn-align {
   margin-right: 10px;
+}
+
+@media (max-width: 425px) {
+  .date-align {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .btn-align {
+    margin-right: 0;
+  }
+  .btn-group {
+    display: block;
+    margin-bottom: 10px;
+  }
 }
