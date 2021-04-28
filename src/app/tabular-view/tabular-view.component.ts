@@ -17,7 +17,7 @@ export class TabularViewComponent implements OnInit {
 
   columnDefs = [];
 
-  rowData = [];
+  weatherReport = [];
 
   defaultColDef = {
     flex: 1,
@@ -54,7 +54,7 @@ export class TabularViewComponent implements OnInit {
         }
       ];
       this.weatherHistory.map(weatherReport => {
-        this.rowData.push(
+        this.weatherReport.push(
           trackReport === "Temperature"
             ? {
                 Date: weatherReport.Date,
