@@ -17,6 +17,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
     TabularViewComponent,
     ChartViewComponent,
     TemperatureReportComponent,
-    HumidityReportComponent
+    HumidityReportComponent,
+    HeaderComponent
   ],
   bootstrap: [AppComponent],
   providers: [

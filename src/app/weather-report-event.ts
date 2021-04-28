@@ -3,12 +3,11 @@ import { WeatherReportService } from "./services/weather-report.service";
 import moment from "moment";
 import { LoadingScreenService } from "./services/loading-screen.service";
 
-
 @Injectable()
 export class WeatherReportEvent {
   constructor(
     private weatherService: WeatherReportService,
-    private loadingScreenService: LoadingScreenService,
+    private loadingScreenService: LoadingScreenService
   ) {}
 
   getWeatherInfo(
@@ -23,7 +22,9 @@ export class WeatherReportEvent {
       let date = moment(selectedDate)
         .subtract(reportDays, "days")
         .add(generateDate * forecastDays, "days")
-        .format("YYYY-MM-DD[T]" + new Date().getHours() + ":mm:ss");
+        .format(
+          "YYYY-MM-DD[T]" + ("0" + new Date().getHours()).substr(-2) + ":mm:ss"
+        );
       dynamicDates.push(date);
     });
     this.weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
@@ -51,7 +52,6 @@ export class WeatherReportEvent {
         const updatedWeatherReport = weatherDataReport.reverse().slice(2);
         console.log("hello" + updatedWeatherReport.length);
         if (updatedWeatherReport.length === 0) {
-       
         } else {
           this.weatherService.weatherReport(updatedWeatherReport);
         }
