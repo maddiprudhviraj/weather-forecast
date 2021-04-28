@@ -36,7 +36,6 @@ export class ChartViewComponent implements OnInit {
   }
 
   generateChartReport(trackReport: string) {
-    if (this.weatherHistory.length > 0) {
       let xAxisDates = [];
       let weatherData = [];
 
@@ -54,7 +53,6 @@ export class ChartViewComponent implements OnInit {
         weatherData,
         trackReport === "Temperature" ? "Temperature \xB0C" : "Humidity %"
       );
-    }
   }
 
   displayWeatherReport(

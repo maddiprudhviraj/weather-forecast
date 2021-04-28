@@ -1,4 +1,4 @@
-<ng-container *ngIf="weatherReport.length!=0">
+<ng-container *ngIf="weatherReport">
   <ag-grid-angular class="ag-theme-alpine table-width" [rowData]="weatherReport" [columnDefs]="columnDefs"
     [paginationPageSize]="10" [pagination]="true" [defaultColDef]="defaultColDef">
   </ag-grid-angular>

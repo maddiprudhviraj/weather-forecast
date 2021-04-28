@@ -69,9 +69,9 @@ export class WeatherReportEvent {
             action ? actionButtonLabel : undefined,
             config
           );
-        } else {
-          this.weatherService.weatherReport(updatedWeatherReport);
         }
+        this.weatherService.weatherReport(updatedWeatherReport);
+
         this.loadingScreenService.stopLoading();
       },
       err => {
