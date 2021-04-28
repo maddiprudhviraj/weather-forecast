@@ -19,20 +19,4 @@
   margin-bottom: 30px;
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
 
-.header-left-text {
-  margin-bottom: 20px;
-}
-
-.date-align {
-  margin-right: 10px;
-}
-
-.btn-align {
-  margin-right: 10px;
-}
