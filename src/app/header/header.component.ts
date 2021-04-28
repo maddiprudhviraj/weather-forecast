@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
+import { WeatherInfoType } from "../weather-info-type";
 import {
   Weather_Forecast_Days,
   Weather_Report_Days
@@ -42,7 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigatePage(redirect: string) {
-    this.selectedTemperature = redirect === "humidity" ? false : true;
+    this.selectedTemperature = redirect === WeatherInfoType.Humidity ? false : true;
     this.router.navigateByUrl(redirect);
   }
 }
