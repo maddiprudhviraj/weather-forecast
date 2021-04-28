@@ -20,7 +20,8 @@ export class HeaderComponent implements OnInit {
     @Inject(Weather_Forecast_Days) private _weather_Forecast_Days: number
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   disableFutureDates(): string {
     return new Date().toISOString().split("T")[0];
