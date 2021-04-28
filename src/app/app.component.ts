@@ -12,6 +12,7 @@ import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
 export class AppComponent {
   loading: boolean = false;
   loadingSubscription: Subscription;
+  showDashBoard = false;
 
   constructor(
     private _weatherReportEvent: WeatherReportEvent,
@@ -28,6 +29,7 @@ export class AppComponent {
     this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe(
       (value: boolean) => {
         this.loading = value;
+        this.showDashBoard = true;
       }
     );
   }

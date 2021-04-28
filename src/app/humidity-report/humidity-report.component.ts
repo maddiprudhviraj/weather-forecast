@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
   styleUrls: ["./humidity-report.component.css"]
 })
 export class HumidityReportComponent implements OnInit {
-  
+  trackReport = "humidity";
   constructor() {}
 
   ngOnInit() {}

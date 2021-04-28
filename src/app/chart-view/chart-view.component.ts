@@ -1,9 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { WeatherReportService } from "../services/weather-report.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
-import { Router } from "@angular/router";
 import { WeatherReport } from "../../weather-report-model";
 
 addMore(Highcharts);
@@ -15,45 +14,48 @@ addMore(Highcharts);
 })
 export class ChartViewComponent implements OnInit {
   subscription: Subscription;
+  @Input() trackReport: string;
 
   highcharts = Highcharts;
   chartOptions: Highcharts.Options;
+  weatherHistory: WeatherReport[];
 
-  constructor(
-    private weatherService: WeatherReportService,
-    private router: Router
-  ) {
+  constructor(private weatherService: WeatherReportService) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
       weatherHistory => {
-        let currentRoute = this.router.url;
-
-        if (weatherHistory.length > 0) {
-          let xAxisDates = [];
-          let weatherData = [];
-
-          weatherHistory.map(weatherReport => {
-            xAxisDates.push(weatherReport.Date);
-            weatherData.push(
-              currentRoute === "/temperature"
-                ? [
-                    weatherReport.temperature_low,
-                    weatherReport.temperature_high
-                  ]
-                : [weatherReport.humidity_low, weatherReport.humidity_high]
-            );
-          });
-
-          this.displayWeatherReport(
-            xAxisDates,
-            weatherData,
-            currentRoute === "/temperature" ? "Temperature \xB0C" : "Humidity %"
-          );
+        this.weatherHistory = weatherHistory;
+        if (this.trackReport) {
+          this.generateChartReport(this.trackReport);
         }
       }
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.generateChartReport(this.trackReport);
+  }
+
+  generateChartReport(trackReport: string) {
+    if (this.weatherHistory.length > 0) {
+      let xAxisDates = [];
+      let weatherData = [];
+
+      this.weatherHistory.map(weatherReport => {
+        xAxisDates.push(weatherReport.Date);
+        weatherData.push(
+          trackReport === "temperature"
+            ? [weatherReport.temperature_low, weatherReport.temperature_high]
+            : [weatherReport.humidity_low, weatherReport.humidity_high]
+        );
+      });
+
+      this.displayWeatherReport(
+        xAxisDates,
+        weatherData,
+        trackReport === "temperature" ? "Temperature \xB0C" : "Humidity %"
+      );
+    }
+  }
 
   displayWeatherReport(
     xAxisDates: string[],
