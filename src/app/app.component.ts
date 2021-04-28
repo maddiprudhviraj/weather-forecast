@@ -12,7 +12,7 @@ import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
 export class AppComponent {
   loading: boolean = false;
   loadingSubscription: Subscription;
-  showDashBoard = false;
+  showDashBoard: boolean = false;
 
   constructor(
     private _weatherReportEvent: WeatherReportEvent,
