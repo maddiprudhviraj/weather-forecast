@@ -4,7 +4,9 @@ import { Observable, forkJoin } from "rxjs";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { WeatherReport } from "../../weather-report-model";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class WeatherReportService {
   public weatherData = new BehaviorSubject<WeatherReport[]>([]);
 

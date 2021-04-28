@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-temperature-report",
@@ -6,7 +6,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
   styleUrls: ["./temperature-report.component.css"]
 })
 export class TemperatureReportComponent implements OnInit {
-  trackReport = "Temperature"
+  trackReport = "Temperature";
   constructor() {}
 
   ngOnInit() {}

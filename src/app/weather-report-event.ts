@@ -1,15 +1,12 @@
 import { Injectable } from "@angular/core";
 import { WeatherReportService } from "./services/weather-report.service";
 import moment from "moment";
-import {
-  MatSnackBar,
-  MatSnackBarConfig,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition
-} from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { LoadingScreenService } from "./services/loading-screen.service";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class WeatherReportEvent {
   constructor(
     private weatherService: WeatherReportService,
