@@ -71,7 +71,7 @@ export class ChartViewComponent implements OnInit {
         text: yAxisTitle.split(" ")[0] + " " + "Report of last 30 Days"
       },
       subtitle: {
-        text: "Weather Report"
+        text: "Weather Status"
       },
       xAxis: {
         categories: xAxisDates
