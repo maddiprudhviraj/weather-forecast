@@ -36,25 +36,23 @@ export class ChartViewComponent implements OnInit {
   }
 
   generateChartReport(trackReport: string) {
-    if (this.weatherHistory.length > 0) {
-      let xAxisDates = [];
-      let weatherData = [];
+    let xAxisDates = [];
+    let weatherData = [];
 
-      this.weatherHistory.map(weatherReport => {
-        xAxisDates.push(weatherReport.Date);
-        weatherData.push(
-          trackReport === "Temperature"
-            ? [weatherReport.temperature_low, weatherReport.temperature_high]
-            : [weatherReport.humidity_low, weatherReport.humidity_high]
-        );
-      });
-
-      this.displayWeatherReport(
-        xAxisDates,
-        weatherData,
-        trackReport === "Temperature" ? "Temperature \xB0C" : "Humidity %"
+    this.weatherHistory.map(weatherReport => {
+      xAxisDates.push(weatherReport.Date);
+      weatherData.push(
+        trackReport === "Temperature"
+          ? [weatherReport.temperature_low, weatherReport.temperature_high]
+          : [weatherReport.humidity_low, weatherReport.humidity_high]
       );
-    }
+    });
+
+    this.displayWeatherReport(
+      xAxisDates,
+      weatherData,
+      trackReport === "Temperature" ? "Temperature \xB0C" : "Humidity %"
+    );
   }
 
   displayWeatherReport(

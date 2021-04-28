@@ -41,34 +41,32 @@ export class TabularViewComponent implements OnInit {
   }
 
   generateChartReport(trackReport: string) {
-    if (this.weatherHistory.length > 0) {
-      this.weatherReport = [];
-      this.columnDefs = [
-        { field: "Date" },
-        {
-          field:
-            trackReport === "Temperature" ? "Temperature Low" : "Humidity Low"
-        },
-        {
-          field:
-            trackReport === "Temperature" ? "Temperature High" : "Humidity High"
-        }
-      ];
-      this.weatherHistory.map(weatherReport => {
-        this.weatherReport.push(
-          trackReport === "Temperature"
-            ? {
-                Date: weatherReport.Date,
-                "Temperature Low": weatherReport.temperature_low,
-                "Temperature High": weatherReport.temperature_high
-              }
-            : {
-                Date: weatherReport.Date,
-                "Humidity Low": weatherReport.humidity_low,
-                "Humidity High": weatherReport.humidity_high
-              }
-        );
-      });
-    }
+    this.weatherReport = [];
+    this.columnDefs = [
+      { field: "Date" },
+      {
+        field:
+          trackReport === "Temperature" ? "Temperature Low" : "Humidity Low"
+      },
+      {
+        field:
+          trackReport === "Temperature" ? "Temperature High" : "Humidity High"
+      }
+    ];
+    this.weatherHistory.map(weatherReport => {
+      this.weatherReport.push(
+        trackReport === "Temperature"
+          ? {
+              Date: weatherReport.Date,
+              "Temperature Low": weatherReport.temperature_low,
+              "Temperature High": weatherReport.temperature_high
+            }
+          : {
+              Date: weatherReport.Date,
+              "Humidity Low": weatherReport.humidity_low,
+              "Humidity High": weatherReport.humidity_high
+            }
+      );
+    });
   }
 }

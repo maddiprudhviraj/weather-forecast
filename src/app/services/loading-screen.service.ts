@@ -14,7 +14,7 @@ export class LoadingScreenService {
 
   set loading(value) {
     this._loading = value;
-     this.loadingStatus.next(value);
+    this.loadingStatus.next(value);
   }
 
   startLoading() {
