@@ -1,13 +1,20 @@
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { WeatherReportService } from "./services/weather-report.service";
 import moment from "moment";
+import {
+  MatSnackBar,
+  MatSnackBarConfig,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from "@angular/material/snack-bar";
 import { LoadingScreenService } from "./services/loading-screen.service";
 
 @Injectable()
 export class WeatherReportEvent {
   constructor(
     private weatherService: WeatherReportService,
-    private loadingScreenService: LoadingScreenService
+    private loadingScreenService: LoadingScreenService,
+    public snackBar: MatSnackBar
   ) {}
 
   getWeatherInfo(
@@ -52,6 +59,18 @@ export class WeatherReportEvent {
         const updatedWeatherReport = weatherDataReport.reverse().slice(2);
         console.log("hello" + updatedWeatherReport.length);
         if (updatedWeatherReport.length === 0) {
+          let config = new MatSnackBarConfig();
+          let actionButtonLabel: string = "Retry";
+          let action: boolean = true;
+          config.verticalPosition = "top";
+          config.horizontalPosition = "center";
+          config.duration = 3000;
+          this.snackBar.open(
+            "Weather Report is not Available for selected date",
+            action ? actionButtonLabel : undefined,
+            config
+          );
+          this.weatherService.weatherReport([]);
         } else {
           this.weatherService.weatherReport(updatedWeatherReport);
         }

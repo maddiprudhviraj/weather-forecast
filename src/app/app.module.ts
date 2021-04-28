@@ -15,9 +15,11 @@ import { HumidityReportComponent } from "./humidity-report/humidity-report.compo
 import { WeatherReportEvent } from "./weather-report-event";
 import { AppRoutingModule } from "./app-routing.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from "./header/header.component";
+
 
 @NgModule({
   imports: [
@@ -28,7 +30,8 @@ import { HeaderComponent } from './header/header.component';
     HighchartsChartModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    MatSnackBarModule
   ],
   declarations: [
     AppComponent,

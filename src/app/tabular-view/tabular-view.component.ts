@@ -42,6 +42,7 @@ export class TabularViewComponent implements OnInit {
 
   generateChartReport(trackReport: string) {
     if (this.weatherHistory.length > 0) {
+      this.weatherReport = [];
       this.columnDefs = [
         { field: "Date" },
         {
