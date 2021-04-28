@@ -70,7 +70,6 @@ export class WeatherReportEvent {
             action ? actionButtonLabel : undefined,
             config
           );
-          this.weatherService.weatherReport([]);
         } else {
           this.weatherService.weatherReport(updatedWeatherReport);
         }
