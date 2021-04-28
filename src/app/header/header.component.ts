@@ -13,6 +13,7 @@ import { WeatherReportEvent } from "../weather-report-event";
 })
 export class HeaderComponent implements OnInit {
   isSelectedNewDate: boolean;
+  selectedTemperature: boolean;
   constructor(
     private router: Router,
     private _weatherReportEvent: WeatherReportEvent,
@@ -20,7 +21,9 @@ export class HeaderComponent implements OnInit {
     @Inject(Weather_Forecast_Days) private _weather_Forecast_Days: number
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.selectedTemperature = true;
+  }
 
   disableFutureDates(): string {
     return new Date().toISOString().split("T")[0];
@@ -39,6 +42,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigatePage(redirect: string) {
+    this.selectedTemperature = redirect === "humidity" ? false : true;
     this.router.navigateByUrl(redirect);
   }
 }
