@@ -57,7 +57,6 @@ export class WeatherReportEvent {
           }
         });
         const updatedWeatherReport = weatherDataReport.reverse().slice(2);
-        console.log("hello" + updatedWeatherReport.length);
         if (updatedWeatherReport.length === 0) {
           let config = new MatSnackBarConfig();
           let actionButtonLabel: string = "Retry";
