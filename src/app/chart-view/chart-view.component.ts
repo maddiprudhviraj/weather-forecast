@@ -3,7 +3,8 @@ import { WeatherReportService } from "../services/weather-report.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from "highcharts";
 import addMore from "highcharts/highcharts-more";
-import { WeatherReport } from "../../weather-report-model";
+import { WeatherReport } from "../weather-report-model";
+import { WeatherInfoType } from "../weather-info-type";
 
 addMore(Highcharts);
 
@@ -42,7 +43,7 @@ export class ChartViewComponent implements OnInit {
     this.weatherHistory.map(weatherReport => {
       xAxisDates.push(weatherReport.Date);
       weatherData.push(
-        trackReport === "Temperature"
+        trackReport === WeatherInfoType.Temperature
           ? [weatherReport.temperature_low, weatherReport.temperature_high]
           : [weatherReport.humidity_low, weatherReport.humidity_high]
       );
@@ -51,7 +52,9 @@ export class ChartViewComponent implements OnInit {
     this.displayWeatherReport(
       xAxisDates,
       weatherData,
-      trackReport === "Temperature" ? "Temperature \xB0C" : "Humidity %"
+      trackReport === WeatherInfoType.Temperature
+        ? "Temperature \xB0C"
+        : "Humidity %"
     );
   }
 

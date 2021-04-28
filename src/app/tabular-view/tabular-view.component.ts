@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { WeatherReport } from "../../weather-report-model";
+import { WeatherReport } from "../weather-report-model";
 import { WeatherReportService } from "../services/weather-report.service";
+import {WeatherInfoType} from "../weather-info-type"
 
 @Component({
   selector: "app-tabular-view",
@@ -46,16 +47,16 @@ export class TabularViewComponent implements OnInit {
       { field: "Date" },
       {
         field:
-          trackReport === "Temperature" ? "Temperature Low" : "Humidity Low"
+          trackReport === WeatherInfoType.Temperature ? "Temperature Low" : "Humidity Low"
       },
       {
         field:
-          trackReport === "Temperature" ? "Temperature High" : "Humidity High"
+          trackReport === WeatherInfoType.Temperature ? "Temperature High" : "Humidity High"
       }
     ];
     this.weatherHistory.map(weatherReport => {
       this.weatherReport.push(
-        trackReport === "Temperature"
+        trackReport === WeatherInfoType.Temperature
           ? {
               Date: weatherReport.Date,
               "Temperature Low": weatherReport.temperature_low,

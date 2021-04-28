@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import {WeatherInfoType} from "../weather-info-type"
 
 @Component({
   selector: "app-temperature-report",
@@ -6,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./temperature-report.component.css"]
 })
 export class TemperatureReportComponent implements OnInit {
-  trackReport = "Temperature";
+  trackReport = WeatherInfoType.Temperature;
   constructor() {}
 
   ngOnInit() {}

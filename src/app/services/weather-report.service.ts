@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, forkJoin } from "rxjs";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { WeatherReport } from "../../weather-report-model";
+import { WeatherReport } from "../weather-report-model";
 
 @Injectable({
   providedIn: "root"

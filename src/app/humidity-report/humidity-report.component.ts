@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { WeatherInfoType } from "../weather-info-type";
 
 @Component({
   selector: "app-humidity-report",
@@ -6,7 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
   styleUrls: ["./humidity-report.component.css"]
 })
 export class HumidityReportComponent implements OnInit {
-  trackReport = "Humidity";
+  trackReport = WeatherInfoType.Humidity;
   constructor() {}
 
   ngOnInit() {}
