@@ -43,7 +43,7 @@ export class ChartViewComponent implements OnInit {
       this.weatherHistory.map(weatherReport => {
         xAxisDates.push(weatherReport.Date);
         weatherData.push(
-          trackReport === "temperature"
+          trackReport === "Temperature"
             ? [weatherReport.temperature_low, weatherReport.temperature_high]
             : [weatherReport.humidity_low, weatherReport.humidity_high]
         );
@@ -52,7 +52,7 @@ export class ChartViewComponent implements OnInit {
       this.displayWeatherReport(
         xAxisDates,
         weatherData,
-        trackReport === "temperature" ? "Temperature \xB0C" : "Humidity %"
+        trackReport === "Temperature" ? "Temperature \xB0C" : "Humidity %"
       );
     }
   }

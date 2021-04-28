@@ -6,7 +6,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
   styleUrls: ["./temperature-report.component.css"]
 })
 export class TemperatureReportComponent implements OnInit {
-  trackReport = "temperature"
+  trackReport = "Temperature"
   constructor() {}
 
   ngOnInit() {}

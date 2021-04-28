@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, Input, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
+import { WeatherReport } from "../../weather-report-model";
 import { WeatherReportService } from "../services/weather-report.service";
 
 @Component({
@@ -11,7 +11,11 @@ import { WeatherReportService } from "../services/weather-report.service";
 export class TabularViewComponent implements OnInit {
   subscription: Subscription;
 
-  columnDefs = [{ field: "Date" }, { field: "Low" }, { field: "High" }];
+  @Input() trackReport: string;
+
+  weatherHistory: WeatherReport[];
+
+  columnDefs = [];
 
   rowData = [];
 
@@ -21,36 +25,49 @@ export class TabularViewComponent implements OnInit {
     resizable: true
   };
 
-  constructor(
-    private weatherService: WeatherReportService,
-    private router: Router
-  ) {
+  constructor(private weatherService: WeatherReportService) {
     this.subscription = this.weatherService.trackWeatherReport.subscribe(
       weatherHistory => {
-        let currentRoute = this.router.url;
-        if (weatherHistory.length > 0) {
-          this.rowData = [];
-          if (currentRoute === "/temperature") {
-            weatherHistory.map(item => {
-              this.rowData.push({
-                Date: item.Date,
-                Low: item.temperature_low,
-                High: item.temperature_high
-              });
-            });
-          } else {
-            weatherHistory.map(item => {
-              this.rowData.push({
-                Date: item.Date,
-                Low: item.humidity_low,
-                High: item.humidity_high
-              });
-            });
-          }
+        this.weatherHistory = weatherHistory;
+        if (this.trackReport) {
+          this.generateChartReport(this.trackReport);
         }
       }
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.generateChartReport(this.trackReport);
+  }
+
+  generateChartReport(trackReport: string) {
+    if (this.weatherHistory.length > 0) {
+      this.columnDefs = [
+        { field: "Date" },
+        {
+          field:
+            trackReport === "Temperature" ? "Temperature Low" : "Humidity Low"
+        },
+        {
+          field:
+            trackReport === "Temperature" ? "Temperature High" : "Humidity High"
+        }
+      ];
+      this.weatherHistory.map(weatherReport => {
+        this.rowData.push(
+          trackReport === "Temperature"
+            ? {
+                Date: weatherReport.Date,
+                "Temperature Low": weatherReport.temperature_low,
+                "Temperature High": weatherReport.temperature_high
+              }
+            : {
+                Date: weatherReport.Date,
+                "Humidity Low": weatherReport.humidity_low,
+                "Humidity High": weatherReport.humidity_high
+              }
+        );
+      });
+    }
+  }
 }
