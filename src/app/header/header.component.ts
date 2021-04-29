@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   isSelectedNewDate: boolean;
   selectedTemperature: boolean;
   constructor(
-    private router: Router,
+    private _router: Router,
     private _weatherReportEvent: WeatherReportEvent,
     @Inject(Weather_Report_Days) private _weather_Report_Days: number,
     @Inject(Weather_Forecast_Days) private _weather_Forecast_Days: number
@@ -44,6 +44,6 @@ export class HeaderComponent implements OnInit {
 
   navigatePage(redirect: string) {
     this.selectedTemperature = redirect === WeatherInfoType.Humidity ? false : true;
-    this.router.navigateByUrl(redirect);
+    this._router.navigateByUrl(redirect);
   }
 }

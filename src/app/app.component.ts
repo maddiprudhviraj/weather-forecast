@@ -16,7 +16,7 @@ export class AppComponent {
 
   constructor(
     private _weatherReportEvent: WeatherReportEvent,
-    private loadingScreenService: LoadingScreenService,
+    private _loadingScreenService: LoadingScreenService,
     @Inject(Weather_Report_Days) private _weather_Report_Days: number,
     @Inject(Weather_Forecast_Days) private _weather_Forecast_Days: number
   ) {}
@@ -26,7 +26,7 @@ export class AppComponent {
       this._weather_Report_Days,
       this._weather_Forecast_Days
     );
-    this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe(
+    this.loadingSubscription = this._loadingScreenService.loadingStatus.subscribe(
       (value: boolean) => {
         this.loading = value;
         this.showDashBoard = true;

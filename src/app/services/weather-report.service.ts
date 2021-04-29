@@ -16,13 +16,13 @@ export class WeatherReportService {
     this.weatherData.next(weatherDataReport);
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
   getWeatherReportHistory(...dates: Date[]): Observable<any[]> {
     let weatherInfoFromDates = [];
     dates.map(date => {
       weatherInfoFromDates.push(
-        this.http.get(
+        this._http.get(
           `https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date_time=${date}`
         )
       );

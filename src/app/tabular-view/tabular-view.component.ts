@@ -26,8 +26,8 @@ export class TabularViewComponent implements OnInit {
     resizable: true
   };
 
-  constructor(private weatherService: WeatherReportService) {
-    this.subscription = this.weatherService.trackWeatherReport.subscribe(
+  constructor(private _weatherService: WeatherReportService) {
+    this.subscription = this._weatherService.trackWeatherReport.subscribe(
       weatherHistory => {
         this.weatherHistory = weatherHistory;
         if (this.trackReport) {

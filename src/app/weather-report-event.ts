@@ -9,8 +9,8 @@ import { LoadingScreenService } from "./services/loading-screen.service";
 })
 export class WeatherReportEvent {
   constructor(
-    private weatherService: WeatherReportService,
-    private loadingScreenService: LoadingScreenService,
+    private _weatherService: WeatherReportService,
+    private _loadingScreenService: LoadingScreenService,
     public snackBar: MatSnackBar
   ) {}
 
@@ -19,7 +19,7 @@ export class WeatherReportEvent {
     forecastDays: number,
     selectedDate?: Date
   ) {
-    this.loadingScreenService.startLoading();
+    this._loadingScreenService.startLoading();
     const generateDates = [...Array(8).keys()];
     let dynamicDates = [];
     generateDates.forEach(function(generateDate) {
@@ -31,7 +31,7 @@ export class WeatherReportEvent {
         );
       dynamicDates.push(date);
     });
-    this.weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
+    this._weatherService.getWeatherReportHistory(...dynamicDates).subscribe(
       weatherDataResponse => {
         let weatherDataReport = [];
         weatherDataResponse.map(dateWeatherReport => {
@@ -67,12 +67,12 @@ export class WeatherReportEvent {
             config
           );
         }
-        this.weatherService.weatherReport(updatedWeatherReport);
+        this._weatherService.weatherReport(updatedWeatherReport);
 
-        this.loadingScreenService.stopLoading();
+        this._loadingScreenService.stopLoading();
       },
       err => {
-        this.loadingScreenService.stopLoading();
+        this._loadingScreenService.stopLoading();
         console.log("HTTP Error", err);
       }
     );
