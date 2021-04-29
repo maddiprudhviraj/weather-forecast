@@ -5,7 +5,7 @@ import { LoadingScreenService } from "./services/loading-screen.service";
 import { Weather_Forecast_Days, Weather_Report_Days } from "./injection.tokens";
 
 @Component({
-  selector: "my-app",
+  selector: "weather-report",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
