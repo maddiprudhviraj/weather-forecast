@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { WeatherReport } from "../weather-report-model";
 import { WeatherReportService } from "../services/weather-report.service";
-import {WeatherInfoType} from "../weather-info-type"
+import { WeatherInfoType } from "../weather-info-type";
 
 @Component({
   selector: "app-tabular-view",
@@ -13,6 +13,10 @@ export class TabularViewComponent implements OnInit {
   subscription: Subscription;
 
   @Input() trackReport: string;
+
+  @Input() paginationPageSize: number;
+
+  @Input() pagination: boolean;
 
   weatherHistory: WeatherReport[];
 
@@ -31,27 +35,31 @@ export class TabularViewComponent implements OnInit {
       weatherHistory => {
         this.weatherHistory = weatherHistory;
         if (this.trackReport) {
-          this.generateChartReport(this.trackReport);
+          this.generateTableReport(this.trackReport);
         }
       }
     );
   }
 
   ngOnInit() {
-    this.generateChartReport(this.trackReport);
+    this.generateTableReport(this.trackReport);
   }
 
-  generateChartReport(trackReport: string) {
+  generateTableReport(trackReport: string) {
     this.weatherReport = [];
     this.columnDefs = [
       { field: "Date" },
       {
         field:
-          trackReport === WeatherInfoType.Temperature ? "Temperature Low" : "Humidity Low"
+          trackReport === WeatherInfoType.Temperature
+            ? "Temperature Low"
+            : "Humidity Low"
       },
       {
         field:
-          trackReport === WeatherInfoType.Temperature ? "Temperature High" : "Humidity High"
+          trackReport === WeatherInfoType.Temperature
+            ? "Temperature High"
+            : "Humidity High"
       }
     ];
     this.weatherHistory.map(weatherReport => {

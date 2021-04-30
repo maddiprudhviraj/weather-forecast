@@ -8,6 +8,9 @@ import {WeatherInfoType} from "../weather-info-type"
 })
 export class TemperatureReportComponent implements OnInit {
   trackReport = WeatherInfoType.Temperature;
+  paginationPageSize = 10;
+  pagination = true;
+
   constructor() {}
 
   ngOnInit() {}
