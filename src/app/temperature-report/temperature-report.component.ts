@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {WeatherInfoType} from "../weather-info-type"
+import { WeatherInfoType } from "../weather-info-type";
 
 @Component({
   selector: "app-temperature-report",
@@ -8,8 +8,8 @@ import {WeatherInfoType} from "../weather-info-type"
 })
 export class TemperatureReportComponent implements OnInit {
   trackReport = WeatherInfoType.Temperature;
-  paginationPageSize = 10;
-  pagination = true;
+  tablePaginationPageSize = 10;
+  tablePagination = true;
 
   constructor() {}
 

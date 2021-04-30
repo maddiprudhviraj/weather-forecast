@@ -8,8 +8,8 @@ import { WeatherInfoType } from "../weather-info-type";
 })
 export class HumidityReportComponent implements OnInit {
   trackReport = WeatherInfoType.Humidity;
-  paginationPageSize = 10;
-  pagination = true;
+  tablePaginationPageSize = 10;
+  tablePagination = true;
   constructor() {}
 
   ngOnInit() {}
